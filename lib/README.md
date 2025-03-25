@@ -1,132 +1,138 @@
-# Md2docx Plugin Template <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 40px"/>
+# **@m2d/core** <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 40px"/>
 
-[![test](https://github.com/md2docx/core/actions/workflows/test.yml/badge.svg)](https://github.com/md2docx/core/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/md2docx/core/maintainability) [![codecov](https://codecov.io/gh/md2docx/core/graph/badge.svg)](https://codecov.io/gh/md2docx/core) [![Version](https://img.shields.io/npm/v/Md2docx Plugin Template.svg?colorB=green)](https://www.npmjs.com/package/Md2docx Plugin Template) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/Md2docx Plugin Template.svg)](https://www.npmjs.com/package/Md2docx Plugin Template) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/Md2docx Plugin Template) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![test](https://github.com/md2docx/core/actions/workflows/test.yml/badge.svg)](https://github.com/md2docx/core/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/md2docx/core/maintainability) [![codecov](https://codecov.io/gh/md2docx/core/graph/badge.svg)](https://codecov.io/gh/md2docx/core) [![Version](https://img.shields.io/npm/v/@m2d/core.svg?colorB=green)](https://www.npmjs.com/package/@m2d/core) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/@m2d/core.svg)](https://www.npmjs.com/package/@m2d/core) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@m2d/core)
 
-Md2docx Plugin Template is a comprehensive library designed to unlock the full potential of React 18 server components. It provides customizable loading animation components and a fullscreen loader container, seamlessly integrating with React and Next.js.
+> The core engine that powers `mdast2docx` — convert Markdown Abstract Syntax Trees (MDAST) into DOCX effortlessly.
 
-✅ Fully Treeshakable (import from `Md2docx Plugin Template/client/loader-container`)
+## ✨ Features
 
-✅ Fully TypeScript Supported
+- ✅ Lightweight and fast MDAST to DOCX conversion
+- ✅ Works on both **client-side** and **server-side** environments
+- ✅ Built-in support for section-based rendering
+- ✅ Plugin-friendly architecture
 
-✅ Leverages the power of React 18 Server components
+> **Note:** With a lean core, functionality can be extended via plugins such as `@m2d/html`, `@m2d/image`, `@m2d/table`, etc.
 
-✅ Compatible with all React 18 build systems/tools/frameworks
+---
 
-✅ Documented with [Typedoc](https://md2docx.github.io/core) ([Docs](https://md2docx.github.io/core))
-
-✅ Examples for Next.js, and Vite
-
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/md2docx/core) and share it with your friends.
-
-## Getting Started
-
-### Installation
+## 📦 Installation
 
 ```bash
-pnpm add Md2docx Plugin Template
+pnpm install @m2d/core
 ```
 
 **_or_**
 
 ```bash
-npm install Md2docx Plugin Template
+yarn add @m2d/core
 ```
 
 **_or_**
 
 ```bash
-yarn add Md2docx Plugin Template
+npm add @m2d/core
 ```
 
-## Want Lite Version? [![npm bundle size](https://img.shields.io/bundlephobia/minzip/Md2docx Plugin Template-lite)](https://www.npmjs.com/package/Md2docx Plugin Template-lite) [![Version](https://img.shields.io/npm/v/Md2docx Plugin Template-lite.svg?colorB=green)](https://www.npmjs.com/package/Md2docx Plugin Template-lite) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/Md2docx Plugin Template-lite.svg)](https://www.npmjs.com/package/Md2docx Plugin Template-lite)
+---
+
+## 🚀 Usage
+
+```ts
+import { toDocx } from "@m2d/core";
+
+const docxBlob = await toDocx(mdast, docxProps, sectionProps);
+```
+
+---
+
+## 🔌 Plugins
+
+`@m2d/core` supports both official and community plugins to extend its capabilities. For example:
+
+```ts
+import { toDocx } from "@m2d/core";
+import { imagePlugin } from "@m2d/image";
+
+await toDocx(mdast, docxProps, {
+  plugins: [imagePlugin()],
+});
+```
+
+> 🔍 Use only the plugins you need for better performance and bundle size.
+> 🧠 You can use official plugins, or build your own custom ones to keep the bundle size minimal and functionality scoped.
+
+### `@m2d/core` official plugins:
+
+| Plugin         | Package                                                  | Purpose                  |
+| -------------- | -------------------------------------------------------- | ------------------------ |
+| HTML           | [`@m2d/html`](https://www.npmjs.com/package/@m2d/html)   | Handle raw HTML nodes    |
+| Image          | [`@m2d/image`](https://www.npmjs.com/package/@m2d/image) | Embed images in DOCX     |
+| Math           | [`@m2d/math`](https://www.npmjs.com/package/@m2d/math)   | Render LaTeX math        |
+| Table          | [`@m2d/table`](https://www.npmjs.com/package/@m2d/table) | Markdown tables          |
+| List           | [`@m2d/list`](https://www.npmjs.com/package/@m2d/list)   | Advanced list formatting |
+| Extended MDAST | [`@m2d/mdast`](https://www.npmjs.com/package/@m2d/mdast) | Extended mdast types     |
+
+---
+
+## 📜 API
+
+### `toDocx(astInputs, docxProps, defaultSectionProps, outputType?)`
+
+| Param                              | Type                                               | Description                               |
+| ---------------------------------- | -------------------------------------------------- | ----------------------------------------- |
+| `astInputs`                        | `Root` or `{ ast: Root; props?: ISectionProps }[]` | The parsed Markdown AST                   |
+| `docxProps` _(optional)_           | `IDocxProps`                                       | Document metadata and style               |
+| `defaultSectionProps` _(optional)_ | `ISectionProps`                                    | Default layout configuration for sections |
+| `outputType` _(optional)_          | `OutputType`                                       | (defaults to `'blob'`)                    |
+
+Returns a `Promise` resolving to a DOCX Blob, Buffer, or Base64 string.
+
+## 🤖 Generative AI Use-case
+
+AI tools often generate Markdown — `@m2d/core` helps convert them into rich DOCX reports or presentations. This is useful in:
+
+- AI-generated blogs, documentation, and research reports
+- Client-side and server-side rendering of AI-generated content
+- Integrating in GenAI pipelines with format export capabilities
+
+---
+
+## 💡 Inspiration & Relevance
+
+This library is especially useful in:
+
+- **Generative AI** — Convert Markdown outputs (e.g., from ChatGPT, LLMs) to downloadable DOCX reports
+- **Developer Tools** — Export Markdown-based documentation or changelogs as DOCX
+- **Education** — Convert notes, quizzes, or assignments authored in Markdown
+
+> ✅ Works both on **client side** and **server side** — offload to browser or use high-performance Node.js.
+
+## 🛠️ Development
 
 ```bash
-pnpm add Md2docx Plugin Template-lite
+git clone https://github.com/tiny-md/mdast2docx
+cd mdast2docx/m2d/core
+pnpm install
+pnpm dev
 ```
 
-**or**
+---
 
-```bash
-npm install Md2docx Plugin Template-lite
-```
+## 📄 License
 
-**or**
+Licensed under the **MPL-2.0** License.
 
-```bash
-yarn add Md2docx Plugin Template-lite
-```
+---
 
-> You need `r18gs` as a peer-dependency
+## ⭐ Support Us
 
-### Import Styles
+If you find this useful:
 
-You can import styles globally or within specific components.
+- ⭐ Star [mdast2docx](https://github.com/tiny-md/mdast2docx) on GitHub
+- ❤️ Consider [sponsoring](https://github.com/sponsors/mayank1513)
 
-```css
-/* globals.css */
-@import "Md2docx Plugin Template/dist";
-```
+---
 
-```tsx
-// layout.tsx
-import "Md2docx Plugin Template/dist/index.css";
-```
+<p align="center">Made with 💖 by <a href="https://mayank-chaudhari.vercel.app" target="_blank">Mayank Kumar Chaudhari</a></p>
 
-For selective imports:
-
-```css
-/* globals.css */
-@import "Md2docx Plugin Template/dist/client"; /** required if you are using LoaderContainer */
-@import "Md2docx Plugin Template/dist/server/bars/bars1";
-```
-
-### Usage
-
-Using loaders is straightforward.
-
-```tsx
-import { Bars1 } from "Md2docx Plugin Template/dist/server/bars/bars1";
-
-export default function MyComponent() {
-  return someCondition ? <Bars1 /> : <>Something else...</>;
-}
-```
-
-For detailed API and options, refer to [the API documentation](https://md2docx.github.io/core).
-
-**Using LoaderContainer**
-
-`LoaderContainer` is a fullscreen component. You can add this component directly in your layout and then use `useLoader` hook to toggle its visibility.
-
-```tsx
-// layout.tsx
-<LoaderContainer />
-	 ...
-```
-
-```tsx
-// some other page or component
-import { useLoader } from "Md2docx Plugin Template/dist/hooks";
-
-export default MyComponent() {
-	const { setLoading } = useLoader();
-	useCallback(()=>{
-		setLoading(true);
-		...do some work
-		setLoading(false);
-	}, [])
-	...
-}
-```
-
-## License
-
-This library is licensed under the MPL-2.0 open-source license.
-
-
-
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please enroll in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsor](https://github.com/sponsors/mayank1513) our work.
-
-<hr />
-
-<p align="center" style="text-align:center">with 💖 by <a href="https://mayank-chaudhari.vercel.app" target="_blank">Mayank Kumar Chaudhari</a></p>
+> _with `@m2d/core`, bring structure, style, and extensibility to your Markdown-to-DOCX pipeline._
