@@ -3,7 +3,7 @@
   "author": "Mayank Kumar Chaudhari (https://mayank-chaudhari.vercel.app)",
   "private": false,
   "version": "0.0.3",
-  "description": "",
+  "description": "Core engine to convert extended MDAST to DOCX. Supports plugins for footnotes, images, lists, tables, and more. Designed for seamless Markdown-to-DOCX conversion.",
   "license": "MPL-2.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -15,6 +15,33 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./section": {
+      "types": "./dist/section.d.ts",
+      "import": "./dist/section.mjs",
+      "require": "./dist/section.js"
+    },
+    "./dist/section": {
+      "types": "./dist/section.d.ts",
+      "import": "./dist/section.mjs",
+      "require": "./dist/section.js"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.mjs",
+      "require": "./dist/utils.js"
+    },
+    "./dist/utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.mjs",
+      "require": "./dist/utils.js"
+    }
+  },
   "scripts": {
     "build": "tsup && tsc -p tsconfig-build.json && gzip -c dist/index.js | wc -c",
     "clean": "rm -rf dist",
@@ -62,12 +89,35 @@
     }
   ],
   "keywords": [
-    "Compatibility",
-    "Frontend development",
-    "UI components",
-    "Web development",
-    "Progressive",
-    "Modern",
-    "Seamless integration"
+    "mdast",
+    "markdown",
+    "generative-ai",
+    "docx",
+    "markdown-to-docx",
+    "mdast-to-docx",
+    "remark",
+    "unified",
+    "text-processing",
+    "document-generator",
+    "typescript",
+    "open-source",
+    "export",
+    "document-generation",
+    "customizable",
+    "renderer",
+    "plugin-system",
+    "footnotes",
+    "tables",
+    "lists",
+    "images",
+    "headings",
+    "rich-text",
+    "automation",
+    "seamless-integration",
+    "cutting-edge",
+    "modern",
+    "frontend",
+    "compatibility",
+    "mayank1513"
   ]
 }

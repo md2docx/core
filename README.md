@@ -1,8 +1,8 @@
 # **@m2d/core** <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 40px"/>
 
-> The core engine that powers `mdast2docx` — convert Markdown Abstract Syntax Trees (MDAST) into DOCX effortlessly.
-
 [![test](https://github.com/md2docx/core/actions/workflows/test.yml/badge.svg)](https://github.com/md2docx/core/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/md2docx/core/maintainability) [![codecov](https://codecov.io/gh/md2docx/core/graph/badge.svg)](https://codecov.io/gh/md2docx/core) [![Version](https://img.shields.io/npm/v/@m2d/core.svg?colorB=green)](https://www.npmjs.com/package/@m2d/core) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/@m2d/core.svg)](https://www.npmjs.com/package/@m2d/core) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@m2d/core)
+
+> The core engine that powers `mdast2docx` — convert Markdown Abstract Syntax Trees (MDAST) into DOCX effortlessly.
 
 ## ✨ Features
 
