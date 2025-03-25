@@ -19,8 +19,7 @@
     "react-mouse-trails": "^0.0.5",
     "react18-loaders": "latest",
     "react18-themes": "^3.2.0",
-    "@m2d/core": "latest",
-    "@m2d/emoji": "workspace:*"
+    "@m2d/core": "latest"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
