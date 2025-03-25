@@ -149,9 +149,6 @@ importers:
 
   lib:
     dependencies:
-      '@m2d/core':
-        specifier: ^0.0.2
-        version: 0.0.2(docx@9.3.0)
       '@m2d/mdast':
         specifier: ^0.0.2
         version: 0.0.2(docx@9.3.0)
@@ -192,12 +189,21 @@ importers:
       jsdom:
         specifier: ^26.0.0
         version: 26.0.0
+      remark-gfm:
+        specifier: ^4.0.1
+        version: 4.0.1
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.12)(sass@1.86.0)(yaml@2.7.0))
