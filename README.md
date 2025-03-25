@@ -1,6 +1,6 @@
 # Md2docx Plugin Template <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 40px"/>
 
-[![test](https://github.com/tiny-md/md2docx-plugin-template/actions/workflows/test.yml/badge.svg)](https://github.com/tiny-md/md2docx-plugin-template/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/tiny-md/md2docx-plugin-template/maintainability) [![codecov](https://codecov.io/gh/tiny-md/md2docx-plugin-template/graph/badge.svg)](https://codecov.io/gh/tiny-md/md2docx-plugin-template) [![Version](https://img.shields.io/npm/v/Md2docx Plugin Template.svg?colorB=green)](https://www.npmjs.com/package/Md2docx Plugin Template) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/Md2docx Plugin Template.svg)](https://www.npmjs.com/package/Md2docx Plugin Template) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/Md2docx Plugin Template) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![test](https://github.com/md2docx/core/actions/workflows/test.yml/badge.svg)](https://github.com/md2docx/core/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/md2docx/core/maintainability) [![codecov](https://codecov.io/gh/md2docx/core/graph/badge.svg)](https://codecov.io/gh/md2docx/core) [![Version](https://img.shields.io/npm/v/Md2docx Plugin Template.svg?colorB=green)](https://www.npmjs.com/package/Md2docx Plugin Template) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/Md2docx Plugin Template.svg)](https://www.npmjs.com/package/Md2docx Plugin Template) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/Md2docx Plugin Template) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
 Md2docx Plugin Template is a comprehensive library designed to unlock the full potential of React 18 server components. It provides customizable loading animation components and a fullscreen loader container, seamlessly integrating with React and Next.js.
 
@@ -12,11 +12,11 @@ Md2docx Plugin Template is a comprehensive library designed to unlock the full p
 
 ✅ Compatible with all React 18 build systems/tools/frameworks
 
-✅ Documented with [Typedoc](https://tiny-md.github.io/md2docx-plugin-template) ([Docs](https://tiny-md.github.io/md2docx-plugin-template))
+✅ Documented with [Typedoc](https://md2docx.github.io/core) ([Docs](https://md2docx.github.io/core))
 
 ✅ Examples for Next.js, and Vite
 
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/tiny-md/md2docx-plugin-template) and share it with your friends.
+> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/md2docx/core) and share it with your friends.
 
 ## Getting Started
 
@@ -92,7 +92,7 @@ export default function MyComponent() {
 }
 ```
 
-For detailed API and options, refer to [the API documentation](https://tiny-md.github.io/md2docx-plugin-template).
+For detailed API and options, refer to [the API documentation](https://md2docx.github.io/core).
 
 **Using LoaderContainer**
 

@@ -20,4 +20,4 @@ Note: We only accept pull requests addressing security vulnerabilities. Addition
 
 ## Reporting Vulnerabilities
 
-Kindly report vulnerabilities [here](https://github.com/tiny-md/md2docx-plugin-template/security/advisories/new).
+Kindly report vulnerabilities [here](https://github.com/md2docx/core/security/advisories/new).

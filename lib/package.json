@@ -1,5 +1,5 @@
 {
-  "name": "@m2d/emoji",
+  "name": "@m2d/core",
   "author": "Mayank Kumar Chaudhari (https://mayank-chaudhari.vercel.app)",
   "private": false,
   "version": "0.0.0",
@@ -8,9 +8,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "repository": "github:tiny-md/md2docx-plugin-template",
-  "bugs": "https://github.com/tiny-md/md2docx-plugin-template/issues",
-  "homepage": "https://github.com/tiny-md/md2docx-plugin-template/#readme",
+  "repository": "github:md2docx/core",
+  "bugs": "https://github.com/md2docx/core/issues",
+  "homepage": "https://github.com/md2docx/core/#readme",
   "sideEffects": false,
   "files": [
     "dist/**"
@@ -50,16 +50,14 @@
   "funding": [
     {
       "type": "github",
-      "url": "https://github.com/sponsors/tiny-md"
+      "url": "https://github.com/sponsors/md2docx"
     },
     {
       "type": "github",
-      "url": "https://github.com/sponsors/mayank1513"
+      "url": "https://github.com/sponsors/tiny-md"
     }
   ],
   "keywords": [
-    "Customizable",
-    "Cutting-edge",
     "Compatibility",
     "Frontend development",
     "UI components",

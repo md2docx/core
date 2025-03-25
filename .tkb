@@ -28,17 +28,17 @@
     },
     "RX4J5v4y5IOe_ucf8pMRT": {
       "id": "RX4J5v4y5IOe_ucf8pMRT",
-      "description": "🌟 Enable [private vulnerability reporting] (For public repo - do this after updating visibility to public)",
+      "description": "🌟 Enable [private vulnerability reporting](https://github.com/md2docx/core/security) (For public repo - do this after updating visibility to public)",
       "columnId": "column-todo"
     },
     "EdPbrbJLllUHfZmCS80f7": {
       "id": "EdPbrbJLllUHfZmCS80f7",
-      "description": "Set up `CodeCov`\n  - Visit Codecov and set up your repo\n  - Create [repository secret] for `CODECOV_TOKEN`",
+      "description": "Set up `CodeCov`\n  - Visit Codecov and set up your repo\n  - Create [repository secret]((https://github.com/md2docx/core/settings/secrets/actions)) for `CODECOV_TOKEN`",
       "columnId": "column-todo"
     },
     "MLLUsAhCKaKxvEXFY0HSq": {
       "id": "MLLUsAhCKaKxvEXFY0HSq",
-      "description": "Set up `CodeClimate`\n  - Visit CodeClimate and set up your repo\n  - Create [repository secret] for `CC_TEST_REPORTER_ID`\n  - Add `*.test.*` to ignore patterns on the website\n  - Update Code Climate badge",
+      "description": "Set up `CodeClimate`\n  - Visit CodeClimate and set up your repo\n  - Create [repository secret]((https://github.com/md2docx/core/settings/secrets/actions)) for `CC_TEST_REPORTER_ID`\n  - Add `*.test.*` to ignore patterns on the website\n  - Update Code Climate badge",
       "columnId": "column-todo"
     },
     "gMYfaAh2RABMP8uZRQgNx": {
