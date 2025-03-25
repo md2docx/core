@@ -1,0 +1,71 @@
+{
+  "name": "@m2d/emoji",
+  "author": "Mayank Kumar Chaudhari (https://mayank-chaudhari.vercel.app)",
+  "private": false,
+  "version": "0.0.0",
+  "description": "",
+  "license": "MPL-2.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "repository": "github:tiny-md/md2docx-plugin-template",
+  "bugs": "https://github.com/tiny-md/md2docx-plugin-template/issues",
+  "homepage": "https://github.com/tiny-md/md2docx-plugin-template/#readme",
+  "sideEffects": false,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig-build.json && gzip -c dist/index.js | wc -c",
+    "clean": "rm -rf dist",
+    "dev": "tsup --watch && tsc -p tsconfig-build.json -w",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "test": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.13.12",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.0.9",
+    "docx": "^9.3.0",
+    "esbuild-plugin-rdi": "^0.0.0",
+    "jsdom": "^26.0.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
+  },
+  "dependencies": {
+    "@m2d/core": "^0.0.2"
+  },
+  "peerDependencies": {
+    "docx": "^9.3.0"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/tiny-md"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/mayank1513"
+    }
+  ],
+  "keywords": [
+    "Customizable",
+    "Cutting-edge",
+    "Compatibility",
+    "Frontend development",
+    "UI components",
+    "Web development",
+    "Progressive",
+    "Modern",
+    "Seamless integration"
+  ]
+}
