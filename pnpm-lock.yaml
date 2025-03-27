@@ -40,8 +40,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shared
       mdast2docx:
-        specifier: 0.3.5
-        version: 0.3.5(docx@9.3.0)(remark-math@6.0.0)
+        specifier: 0.3.6
+        version: 0.3.6(remark-math@6.0.0)
       next:
         specifier: ^15.2.4
         version: 15.2.4(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.0)
@@ -153,8 +153,8 @@ importers:
   lib:
     dependencies:
       '@m2d/mdast':
-        specifier: ^0.0.2
-        version: 0.0.2(docx@9.3.0)
+        specifier: ^0.0.3
+        version: 0.0.3(docx@9.3.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -270,8 +270,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       mdast2docx:
-        specifier: 0.3.5
-        version: 0.3.5(docx@9.3.0)(remark-math@6.0.0)
+        specifier: 0.3.6
+        version: 0.3.6(remark-math@6.0.0)
       nextjs-darkmode:
         specifier: ^1.0.10
         version: 1.0.10(@types/react@19.0.12)(react@19.0.0)
@@ -917,6 +917,11 @@ packages:
 
   '@m2d/mdast@0.0.2':
     resolution: {integrity: sha512-rt3I7maptlrfFn2kY4yKTErDrhFcRoQNobwDQcOdR0i3la66PbZ5D9p0KF20IUsD3p6ExAuZTUt9HKyeQ8jd8g==}
+    peerDependencies:
+      docx: ^9.3.0
+
+  '@m2d/mdast@0.0.3':
+    resolution: {integrity: sha512-2OKRWW2O8RmKk3uwnmkspyR2Y9Qn7Z8uiaFdDX4NGoUBS7+3mmzebdTT8R8afGKHz+4o5quCkNgAzpB2rw4jIw==}
     peerDependencies:
       docx: ^9.3.0
 
@@ -2479,10 +2484,8 @@ packages:
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
 
-  mdast2docx@0.3.5:
-    resolution: {integrity: sha512-oAoW+l1+Y3cAQcqShDhaegLhiozDVPLxNx9FDODJzX41tHNIAQKdJGQ0x4PWd/beEY4YtJteaI3jcI1k4YdvLg==}
-    peerDependencies:
-      docx: ^9.3.0
+  mdast2docx@0.3.6:
+    resolution: {integrity: sha512-+OgEFrQc3GF4jlBN6X5MymdY61TJGfunrCBzOWHLwVLRdXdyTY3M7gVtbFsTW/f5CM2P65dR094GgXtnZae0xA==}
 
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
@@ -2816,8 +2819,8 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
-  pirates@4.0.6:
-    resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
+  pirates@4.0.7:
+    resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
     engines: {node: '>= 6'}
 
   possible-typed-array-names@1.1.0:
@@ -4264,6 +4267,10 @@ snapshots:
       remark-math: 6.0.0
 
   '@m2d/mdast@0.0.2(docx@9.3.0)':
+    dependencies:
+      docx: 9.3.0
+
+  '@m2d/mdast@0.0.3(docx@9.3.0)':
     dependencies:
       docx: 9.3.0
 
@@ -6040,7 +6047,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
 
-  mdast2docx@0.3.5(docx@9.3.0)(remark-math@6.0.0):
+  mdast2docx@0.3.6(remark-math@6.0.0):
     dependencies:
       '@m2d/core': 0.0.3(docx@9.3.0)
       '@m2d/emoji': 0.1.0(docx@9.3.0)
@@ -6479,7 +6486,7 @@ snapshots:
 
   pify@4.0.1: {}
 
-  pirates@4.0.6: {}
+  pirates@4.0.7: {}
 
   possible-typed-array-names@1.1.0: {}
 
@@ -7019,7 +7026,7 @@ snapshots:
       glob: 10.4.5
       lines-and-columns: 1.2.4
       mz: 2.7.0
-      pirates: 4.0.6
+      pirates: 4.0.7
       ts-interface-checker: 0.1.13
 
   supports-color@7.2.0:
