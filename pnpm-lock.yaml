@@ -153,8 +153,8 @@ importers:
   lib:
     dependencies:
       '@m2d/mdast':
-        specifier: ^0.0.3
-        version: 0.0.3(docx@9.3.0)
+        specifier: ^0.1.0
+        version: 0.1.0(docx@9.3.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -924,8 +924,8 @@ packages:
     peerDependencies:
       docx: ^9.3.0
 
-  '@m2d/mdast@0.0.3':
-    resolution: {integrity: sha512-2OKRWW2O8RmKk3uwnmkspyR2Y9Qn7Z8uiaFdDX4NGoUBS7+3mmzebdTT8R8afGKHz+4o5quCkNgAzpB2rw4jIw==}
+  '@m2d/mdast@0.1.0':
+    resolution: {integrity: sha512-LGDqEI1mvHrs7kDtfXuMDdlOLfwG8WU0CQrlynCCF5YOy///czUHw0K1tK1ZAITrLuvQCQrvAwDpElhF3uLSZQ==}
     peerDependencies:
       docx: ^9.3.0
 
@@ -4275,7 +4275,7 @@ snapshots:
     dependencies:
       docx: 9.3.0
 
-  '@m2d/mdast@0.0.3(docx@9.3.0)':
+  '@m2d/mdast@0.1.0(docx@9.3.0)':
     dependencies:
       docx: 9.3.0
 
