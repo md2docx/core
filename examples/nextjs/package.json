@@ -12,7 +12,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@m2d/core": "^0.0.3",
+    "@m2d/core": "^0.0.4",
     "@repo/shared": "workspace:*",
     "mdast2docx": "0.3.6",
     "next": "^15.2.4",
