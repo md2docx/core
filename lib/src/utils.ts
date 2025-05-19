@@ -132,12 +132,12 @@ export type InlineDocxNodes = TextRun | ImageRun | InternalHyperlink | ExternalH
 export type InlineProcessor = (
   node: ExtendedRootContent,
   runProps: MutableRunOptions,
-) => Promise<InlineDocxNodes[]>;
+) => InlineDocxNodes[];
 
 export type InlineChildrenProcessor = (
   node: Parent,
   runProps?: MutableRunOptions,
-) => Promise<InlineDocxNodes[]>;
+) => InlineDocxNodes[];
 
 /**
  * Mutable version of IParagraphOptions where all properties are writable.
@@ -150,12 +150,12 @@ export type MutableParaOptions = Omit<Mutable<IParagraphOptions>, "children"> & 
 export type BlockNodeProcessor = (
   node: ExtendedRootContent,
   paraProps: MutableParaOptions,
-) => Promise<(Paragraph | Table)[]>;
+) => (Paragraph | Table)[];
 
 export type BlockNodeChildrenProcessor = (
   node: Parent | Root,
   paraProps: MutableParaOptions,
-) => Promise<(Paragraph | Table)[]>;
+) => (Paragraph | Table)[];
 
 /**
  * Interface for extending MDAST to DOCX conversion using plugins.
@@ -170,7 +170,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
     paraProps: MutableParaOptions,
     blockChildrenProcessor: BlockNodeChildrenProcessor,
     inlineChildrenProcessor: InlineChildrenProcessor,
-  ) => Promise<(Paragraph | Table)[]>;
+  ) => (Paragraph | Table)[];
 
   /**
    * Processes inline-level nodes.
@@ -182,7 +182,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
     definitions: Definitions,
     footnoteDefinitions: FootnoteDefinitions,
     inlineChildrenProcessor: InlineChildrenProcessor,
-  ) => Promise<InlineDocxNodes[]>;
+  ) => InlineDocxNodes[];
 
   /**
    * Allows plugins to modify document-level DOCX properties, such as styles, numbering, headers, and footers. This is useful for global formatting customizations.
@@ -191,7 +191,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
   /**
    * Preprocess mdast tree before conversion
    */
-  preprocess?: (tree: Root) => void;
+  preprocess?: (tree: Root) => void | Promise<void>;
 }
 
 /**
