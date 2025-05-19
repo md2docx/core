@@ -11,15 +11,18 @@ import {
   Math as DOCXMath,
 } from "docx";
 import * as DOCX from "docx";
-import { BlockContent, Data, DefinitionContent, Parent, Root, RootContent } from "@m2d/mdast";
+import {
+  BlockContent,
+  Data,
+  DefinitionContent,
+  Parent,
+  Root,
+  RootContent,
+  Mutable,
+  Optional,
+} from "@m2d/mdast";
 
 export { convertInchesToTwip, convertMillimetersToTwip } from "docx";
-
-export type Optional<T> = { [K in keyof T]?: T[K] extends object ? Optional<T[K]> : T[K] };
-
-export type Required<T> = { [K in keyof T]-?: T[K] extends object ? Required<T[K]> : T[K] };
-
-export type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] };
 
 /** Type representing definition mappings */
 export type Definitions = Record<string, string>;
@@ -75,7 +78,7 @@ export const getTextContent = (node: ExtendedRootContent): string => {
 /**
  * Default configuration for converting MDAST to DOCX, including title handling and plugin extensions.
  */
-interface IDefaultMdastToDocxSectionProps extends Omit<DOCX.ISectionOptions, "children"> {
+export interface IDefaultMdastToDocxSectionProps extends Omit<DOCX.ISectionOptions, "children"> {
   /**
    * If true, H1 corresponds to the title, H2 to Heading1, etc.
    * @default true
@@ -95,7 +98,7 @@ interface IDefaultMdastToDocxSectionProps extends Omit<DOCX.ISectionOptions, "ch
 
 export type ISectionProps = Optional<IDefaultMdastToDocxSectionProps>;
 
-export const defaultSectionProps: IDefaultMdastToDocxSectionProps = {
+export const DEFAULT_SECTION_PROPS: IDefaultMdastToDocxSectionProps = {
   useTitle: true,
   plugins: [],
 };

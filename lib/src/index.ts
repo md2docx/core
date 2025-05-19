@@ -2,7 +2,13 @@ import { Document, OutputType, Packer, Paragraph } from "docx";
 import type { Root } from "mdast";
 
 import { toSection } from "./section";
-import { defaultDocxProps, getDefinitions, type IDocxProps, type ISectionProps } from "./utils";
+import {
+  DEFAULT_SECTION_PROPS,
+  defaultDocxProps,
+  getDefinitions,
+  type IDocxProps,
+  type ISectionProps,
+} from "./utils";
 
 /**
  * Represents the input Markdown AST tree(s) for conversion.
@@ -23,7 +29,7 @@ type IInputMDAST = Root | { ast: Root; props?: ISectionProps }[];
 export const toDocx = async (
   astInputs: IInputMDAST,
   docxProps: IDocxProps = {},
-  defaultSectionProps: ISectionProps = {},
+  defaultSectionProps: ISectionProps = DEFAULT_SECTION_PROPS,
   outputType: OutputType = "blob",
 ) => {
   let currentFootnoteId = 1;
@@ -32,7 +38,7 @@ export const toDocx = async (
 
   const finalDocxProps = { ...defaultDocxProps, ...docxProps };
   // Apply global document-level modifications from default plugins
-  defaultSectionProps?.plugins?.forEach(plugin => plugin.root?.(finalDocxProps));
+  defaultSectionProps?.plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
 
   const processedAstInputs = await Promise.all(
     (Array.isArray(astInputs) ? astInputs : [{ ast: astInputs }]).map(async ({ ast, props }) => {
@@ -52,7 +58,7 @@ export const toDocx = async (
       );
 
       // update docxProps by plugins
-      props?.plugins?.forEach(plugin => plugin.root?.(finalDocxProps));
+      props?.plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
 
       return { ast, props: { ...defaultSectionProps, ...props }, definitions, footnoteDefinitions };
     }),
@@ -76,5 +82,5 @@ export const toDocx = async (
 };
 
 export type { ISectionProps, IDocxProps, IInputMDAST };
-export type { IPlugin, Mutable, Optional } from "./utils";
+export type { IPlugin } from "./utils";
 export type * from "@m2d/mdast";

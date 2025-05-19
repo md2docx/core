@@ -1,5 +1,5 @@
 import type { Root } from "@m2d/mdast";
-import { defaultSectionProps, getTextContent } from "./utils";
+import { DEFAULT_SECTION_PROPS, getTextContent } from "./utils";
 import type {
   BlockNodeChildrenProcessor,
   Definitions,
@@ -8,6 +8,7 @@ import type {
   InlineChildrenProcessor,
   InlineDocxNodes,
   IPlugin,
+  IDefaultMdastToDocxSectionProps,
 } from "./utils";
 import {
   Bookmark,
@@ -140,7 +141,10 @@ export const toSection = async (
   footnoteDefinitions: FootnoteDefinitions,
   props?: ISectionProps,
 ) => {
-  const { plugins, useTitle, ...sectionProps } = { ...defaultSectionProps, ...props };
+  const { plugins, useTitle, ...sectionProps } = {
+    ...DEFAULT_SECTION_PROPS,
+    ...props,
+  } as IDefaultMdastToDocxSectionProps;
 
   for (const plugin of plugins) await plugin.preprocess?.(node);
 
