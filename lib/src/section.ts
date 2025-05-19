@@ -146,7 +146,7 @@ export const toSection = async (
     ...props,
   } as IDefaultMdastToDocxSectionProps;
 
-  for (const plugin of plugins) await plugin.preprocess?.(node);
+  for (const plugin of plugins) await plugin.preprocess?.(node, definitions);
 
   const processInlineNodeChildren = createInlineProcessor(
     definitions,

@@ -52,7 +52,7 @@ const { visibility } = JSON.parse(execSync("gh repo view --json visibility").toS
 const provenance = visibility.toLowerCase() === "public" ? "--provenance" : "";
 
 /** Create release */
-execSync(`cd lib && pnpm build && npm publish ${provenance} --access public`);
+execSync(`cd lib && pnpm build && npm publish ${provenance} --access public`, { stdio: "inherit" });
 
 /** Create GitHub release */
 try {
