@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- 6f7d1cb: Fix: fix type utils and update Plugin types to include definitions for preprocess.
+
+## 1.0.1
+
+### Patch Changes
+
 - b0098bd: Update preprocess in plugin to include the definitions - required for rendering images.
 
 ## 1.0.0
