@@ -59,7 +59,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
       remark-frontmatter:
         specifier: ^5.0.0
         version: 5.0.0
@@ -123,7 +123,7 @@ importers:
         version: 0.0.5(@types/react@19.1.4)(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
       react18-themes:
         specifier: ^3.2.0
         version: 3.2.0(@types/react@19.1.4)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
@@ -156,8 +156,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(docx@9.5.0)
       '@m2d/mdast':
-        specifier: ^0.1.4
-        version: 0.1.4(docx@9.5.0)
+        specifier: ^0.1.5
+        version: 0.1.5(docx@9.5.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -289,7 +289,7 @@ importers:
         version: 4.1.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.4)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0)
       remark-frontmatter:
         specifier: ^5.0.0
         version: 5.0.0
@@ -958,8 +958,8 @@ packages:
       docx: ^9.3.0
       remark-math: ^6.0.0
 
-  '@m2d/mdast@0.1.4':
-    resolution: {integrity: sha512-8kHMHdP7hJEPsSqmLEMQKBDmioJEpqSv8C8Ue2sMXTuhVhwMm0LiW3okEDL0E30LO1oNq4G+CDRyGselXf4cpg==}
+  '@m2d/mdast@0.1.5':
+    resolution: {integrity: sha512-1VWb5zixs4oZdtd8BZfxKlff5H4b3mRdwJt54dg8ouBIDQ6xJtF8PZiCTMmV5FanBM1Z9D/CI7X7uXYkUBpNuA==}
     peerDependencies:
       docx: ^9.3.0
 
@@ -4705,12 +4705,12 @@ snapshots:
 
   '@m2d/core@0.0.4(docx@9.5.0)':
     dependencies:
-      '@m2d/mdast': 0.1.4(docx@9.5.0)
+      '@m2d/mdast': 0.1.5(docx@9.5.0)
       docx: 9.5.0
 
   '@m2d/core@0.0.5(docx@9.5.0)':
     dependencies:
-      '@m2d/mdast': 0.1.4(docx@9.5.0)
+      '@m2d/mdast': 0.1.5(docx@9.5.0)
       docx: 9.5.0
 
   '@m2d/emoji@0.1.1(docx@9.5.0)':
@@ -4740,7 +4740,7 @@ snapshots:
       latex-math: 0.0.2
       remark-math: 6.0.0
 
-  '@m2d/mdast@0.1.4(docx@9.5.0)':
+  '@m2d/mdast@0.1.5(docx@9.5.0)':
     dependencies:
       docx: 9.5.0
 
@@ -7531,7 +7531,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react18-loaders@1.1.4(@types/react@19.1.4)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0):
+  react18-loaders@1.1.4(@types/react@19.1.4)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0))(react@19.1.0):
     dependencies:
       '@types/react': 19.1.4
       r18gs: 2.1.0(@types/react@19.1.4)(react@19.1.0)

@@ -196,7 +196,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
   /**
    * Preprocess mdast tree before conversion
    */
-  preprocess?: (tree: Root) => void | Promise<void>;
+  preprocess?: (tree: Root, definitions: Definitions) => void | Promise<void>;
 }
 
 /**

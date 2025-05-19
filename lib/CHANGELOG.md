@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.0.1
+
+### Patch Changes
+
+- b0098bd: Update preprocess in plugin to include the definitions - required for rendering images.
+
 ## 1.0.0
 
 ### Major Changes
