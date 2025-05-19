@@ -15,9 +15,11 @@ import { BlockContent, Data, DefinitionContent, Parent, Root, RootContent } from
 
 export { convertInchesToTwip, convertMillimetersToTwip } from "docx";
 
-export type Optional<T> = { [K in keyof T]?: T[K] };
+export type Optional<T> = { [K in keyof T]?: T[K] extends object ? Optional<T[K]> : T[K] };
 
-export type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T> : T[K] };
+export type Required<T> = { [K in keyof T]-?: T[K] extends object ? Required<T[K]> : T[K] };
+
+export type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] };
 
 /** Type representing definition mappings */
 export type Definitions = Record<string, string>;
