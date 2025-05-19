@@ -94,6 +94,7 @@
     "markdown",
     "generative-ai",
     "docx",
+    "docx-for-generative-ai",
     "markdown-to-docx",
     "mdast-to-docx",
     "remark",

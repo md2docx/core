@@ -152,13 +152,13 @@ importers:
 
   lib:
     dependencies:
-      '@m2d/html':
-        specifier: ^1.0.1
-        version: 1.0.1(docx@9.5.0)
       '@m2d/mdast':
         specifier: ^0.1.6
         version: 0.1.6(docx@9.5.0)
     devDependencies:
+      '@m2d/html':
+        specifier: ^1.0.1
+        version: 1.0.1(docx@9.5.0)
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../packages/eslint-config
