@@ -21,6 +21,7 @@ import {
   Paragraph,
   TextRun,
 } from "docx";
+// skipcq: JS-C1003
 import * as docx from "docx";
 
 /**
@@ -68,6 +69,7 @@ const createInlineProcessor = (
                 : [new TextRun({ text: node.value, ...newRunProps })]),
             ];
           case "checkbox":
+            // skipcq: JS-0066
             return [...docxNodes, new CheckBox({ checked: !!node.checked })];
           case "break":
             return [...docxNodes, new TextRun({ break: 1 })];

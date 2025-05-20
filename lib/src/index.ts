@@ -9,6 +9,7 @@ import {
   type IDocxProps,
   type ISectionProps,
 } from "./utils";
+import { RootContent, Root as M2dRoot } from "@m2d/mdast";
 
 /**
  * Represents the input Markdown AST tree(s) for conversion.
@@ -42,7 +43,7 @@ export const toDocx = async (
 
   const processedAstInputs = await Promise.all(
     (Array.isArray(astInputs) ? astInputs : [{ ast: astInputs }]).map(async ({ ast, props }) => {
-      const { definitions, footnoteDefinitions } = getDefinitions(ast.children);
+      const { definitions, footnoteDefinitions } = getDefinitions(ast.children as RootContent[]);
 
       // Convert footnotes into sections
       await Promise.all(
@@ -67,7 +68,7 @@ export const toDocx = async (
   // Convert MDAST trees into document sections
   const sections = await Promise.all(
     processedAstInputs.map(({ ast, props, definitions, footnoteDefinitions }) =>
-      toSection(ast, definitions, footnoteDefinitions, props),
+      toSection(ast as M2dRoot, definitions, footnoteDefinitions, props),
     ),
   );
 

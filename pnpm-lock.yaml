@@ -159,6 +159,9 @@ importers:
       '@m2d/html':
         specifier: ^1.0.2
         version: 1.0.2(docx@9.5.0)
+      '@m2d/list':
+        specifier: ^0.0.6
+        version: 0.0.6(docx@9.5.0)
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../packages/eslint-config
@@ -957,6 +960,11 @@ packages:
 
   '@m2d/list@0.0.5':
     resolution: {integrity: sha512-J+QaUZJsBOBwDIo3fiB+giAhcqVJn0vCZrLr7c+7Y063ztyZBt6tRjZ3R7tiE4WS4FZB6eBvhsufgwFV8pWDYw==}
+    peerDependencies:
+      docx: ^9.3.0
+
+  '@m2d/list@0.0.6':
+    resolution: {integrity: sha512-QbbazToUiJbXbMR73N60ZE0uxpZJkIV8C8+Bn9RXc5SPDbhHMdDBhFJsIBeGtJMApsXMKTvmLVzwvUl9lC6G0w==}
     peerDependencies:
       docx: ^9.3.0
 
@@ -4762,6 +4770,11 @@ snapshots:
   '@m2d/list@0.0.5(docx@9.5.0)':
     dependencies:
       '@m2d/core': 0.0.4(docx@9.5.0)
+      docx: 9.5.0
+
+  '@m2d/list@0.0.6(docx@9.5.0)':
+    dependencies:
+      '@m2d/core': 1.0.1(docx@9.5.0)
       docx: 9.5.0
 
   '@m2d/math@0.0.4(docx@9.5.0)(remark-math@6.0.0)':

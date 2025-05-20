@@ -5,6 +5,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import fs from "fs";
 import { htmlPlugin } from "@m2d/html";
+import { listPlugin } from "@m2d/list";
 
 const markdown = fs.readFileSync("../sample.md", "utf-8");
 
@@ -28,8 +29,11 @@ describe("toDocx", () => {
   it("should include a title in the document properties", async () => {
     const mdast = unified().use(remarkParse).parse(markdown);
 
-    // @ts-expect-error -- types differing as not update yet for htmlPlugin
-    const docxBlob = await toDocx(mdast, { title: "Custom Title" }, { plugins: [htmlPlugin()] });
+    const docxBlob = await toDocx(
+      mdast,
+      { title: "Custom Title" },
+      { plugins: [htmlPlugin(), listPlugin()] },
+    );
 
     expect(docxBlob).toBeDefined(); // Ensure output exists
   });
