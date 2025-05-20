@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.0.2
+
+### Patch Changes
+
+- af4168a: fix image data types
+
 ## 1.0.1
 
 ### Patch Changes
