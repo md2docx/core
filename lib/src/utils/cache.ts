@@ -134,7 +134,7 @@ const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
 
   return getSerializableKeys(copy)
     .sort()
-    .map(key => `${key}:${copy[key]}`)
+    .map(key => `${key}:${stableSerialize(copy[key], ignoreKeys)}`)
     .join("|");
 };
 
