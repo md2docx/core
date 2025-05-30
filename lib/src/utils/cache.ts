@@ -98,7 +98,7 @@ const writeToCache = <T extends { namespace: string; id: string }>(value: T): Pr
  * Serializes a value into a stable string for cache key generation.
  *
  * - Recursively handles arrays and objects
- * - Skips functions and undefined values
+ * - Skips functions, promises and undefined values
  * - Omits keys listed in `ignoreKeys` (only for objects)
  * - Ensures consistent key ordering for objects
  *
@@ -123,7 +123,12 @@ const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
   return Object.keys(copy)
     .filter(key => {
       const value = copy[key];
-      return !ignoreKeys.includes(key) && value !== undefined && typeof value !== "function";
+      return (
+        !ignoreKeys.includes(key) &&
+        value !== undefined &&
+        typeof value !== "function" &&
+        typeof (value as any)?.then !== "function"
+      );
     })
     .sort()
     .map(key => `${key}:${copy[key]}`)
