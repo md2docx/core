@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.4
+
+### Patch Changes
+
+- 3731ab8: fix: handle case when generator return undefined or null
+
 ## 1.1.3
 
 ### Patch Changes
