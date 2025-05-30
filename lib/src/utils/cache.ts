@@ -94,6 +94,18 @@ const writeToCache = <T extends { namespace: string; id: string }>(value: T): Pr
     });
 /* v8 ignore end */
 
+/** get list of serializable keys in sorted order */
+const getSerializableKeys = (object: Record<string, unknown>, ignoreKeys: string[] = []) =>
+  Object.keys(object).filter(key => {
+    const value = object[key];
+    return (
+      !ignoreKeys.includes(key) &&
+      value !== undefined &&
+      typeof value !== "function" &&
+      typeof (value as any)?.then !== "function"
+    );
+  });
+
 /**
  * Serializes a value into a stable string for cache key generation.
  *
@@ -120,16 +132,7 @@ const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
 
   const copy: Record<string, unknown> = { ...obj };
 
-  return Object.keys(copy)
-    .filter(key => {
-      const value = copy[key];
-      return (
-        !ignoreKeys.includes(key) &&
-        value !== undefined &&
-        typeof value !== "function" &&
-        typeof (value as any)?.then !== "function"
-      );
-    })
+  return getSerializableKeys(copy)
     .sort()
     .map(key => `${key}:${copy[key]}`)
     .join("|");
@@ -180,8 +183,16 @@ export const createPersistentCache = <Args extends unknown[], Result>(
         if (cachedResult) return cachedResult;
       }
 
-      const result = await generator(...args);
-      writeToCache({ id: cacheKey, ...result, namespace });
+      const result = (await generator(...args)) as Record<string, string>;
+      const resultsToCache = { id: cacheKey, namespace } as {
+        id: string;
+        namespace: string;
+        [key: string]: unknown;
+      };
+      getSerializableKeys(result).forEach(key => {
+        resultsToCache[key] = result[key];
+      });
+      writeToCache(resultsToCache);
       return result;
     })();
 
