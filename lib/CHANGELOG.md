@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.2
+
+### Patch Changes
+
+- 7dd01ca: Remove non-serializable fields from the generator result before caching
+
 ## 1.1.1
 
 ### Patch Changes
