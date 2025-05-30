@@ -16,6 +16,8 @@ try {
   );
 } catch {
   // no changesets to be applied
+} finally {
+  execSync("cp lib/CHANGELOG.md CHANGELOG.md");
 }
 
 const { version: VERSION, name } = require("../lib/package.json");
