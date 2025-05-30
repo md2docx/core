@@ -164,13 +164,16 @@ export const createPersistentCache = <Args extends unknown[], Result>(
   generator: (...args: Args) => Promise<Result>,
   namespace: string,
   ignoreKeys: string[] = [],
+  useIdb = true,
 ): ((...args: Args) => Promise<Result>) => {
   return async (...args: Args): Promise<Result> => {
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
     runtimeCache[cacheKey] ??= (async () => {
-      const cachedResult = await readFromCache<Result>(cacheKey);
-      if (cachedResult) return cachedResult;
+      if (useIdb) {
+        const cachedResult = await readFromCache<Result>(cacheKey);
+        if (cachedResult) return cachedResult;
+      }
 
       const result = await generator(...args);
       writeToCache({ id: cacheKey, ...result, namespace });

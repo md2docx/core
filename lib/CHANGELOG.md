@@ -1,5 +1,29 @@
 # @m2d/core
 
+## 1.1.0
+
+### Minor Changes
+
+- 56a8c29: Restructure utils and enhance caching system:
+  - Move utils.ts to utils/index.ts for better organization
+  - Replace cache-utils.ts with improved utils/cache.ts implementation
+  - Add namespace support to cache entries for better management
+  - Implement stale cache cleanup functionality
+  - Enhance serialization with better handling of arrays and primitives
+  - Update package.json exports to reflect new file structure
+- 839e2e7: feat: add persistent caching utilities with IndexedDB support
+
+  Implement a centralized caching mechanism that:
+
+  - Provides both in-memory and persistent IndexedDB caching
+  - Includes deterministic cache key generation with xxhash
+  - Supports automatic timestamp tracking for cache entries
+  - Prevents duplicate parallel processing with runtime cache
+  - Adds xxhash-wasm dependency for efficient hashing
+
+  This utility will improve performance by avoiding redundant
+  expensive operations across the application.
+
 ## 1.0.2
 
 ### Patch Changes
