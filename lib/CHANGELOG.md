@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.6
+
+### Patch Changes
+
+- 96d0580: Use Promise.any to load the results as fast as possible either from cache or from directly generating using the generator function
+
 ## 1.1.5
 
 ### Patch Changes
