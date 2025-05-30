@@ -178,12 +178,17 @@ export const createPersistentCache = <Args extends unknown[], Result>(
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
     runtimeCache[cacheKey] ??= (async () => {
-      if (useIdb) {
-        const cachedResult = await readFromCache<Result>(cacheKey);
-        if (cachedResult) return cachedResult;
-      }
+      const promises = [generator(...args)];
+      if (useIdb)
+        promises.push(
+          (async () => {
+            const cachedResult = await readFromCache<Result>(cacheKey);
+            if (cachedResult) return cachedResult;
+            else throw new Error("No cached result found");
+          })(),
+        );
 
-      const result = (await generator(...args)) as Record<string, string> | undefined;
+      const result = (await Promise.any(promises)) as Record<string, string> | undefined;
       const resultsToCache = { id: cacheKey, namespace } as {
         id: string;
         namespace: string;
