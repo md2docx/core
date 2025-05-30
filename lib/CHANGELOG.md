@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.5
+
+### Patch Changes
+
+- 500717b: fix: recursive serialization for objects
+
 ## 1.1.4
 
 ### Patch Changes
