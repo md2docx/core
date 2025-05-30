@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.1
+
+### Patch Changes
+
+- f9dc971: fix: ignore promises in stableSerialize
+
 ## 1.1.0
 
 ### Minor Changes
