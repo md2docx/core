@@ -183,15 +183,17 @@ export const createPersistentCache = <Args extends unknown[], Result>(
         if (cachedResult) return cachedResult;
       }
 
-      const result = (await generator(...args)) as Record<string, string>;
+      const result = (await generator(...args)) as Record<string, string> | undefined;
       const resultsToCache = { id: cacheKey, namespace } as {
         id: string;
         namespace: string;
         [key: string]: unknown;
       };
-      getSerializableKeys(result).forEach(key => {
-        resultsToCache[key] = result[key];
-      });
+      if (result)
+        getSerializableKeys(result).forEach(key => {
+          resultsToCache[key] = result[key];
+        });
+      else resultsToCache.namespace = "keep";
       writeToCache(resultsToCache);
       return result;
     })();
