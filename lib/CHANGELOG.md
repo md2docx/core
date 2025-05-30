@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.1.3
+
+### Patch Changes
+
+- 84d9dbd: fix SVG node value types
+
 ## 1.1.2
 
 ### Patch Changes
