@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.2.0
+
+### Minor Changes
+
+- 8857587: Export docx object for advanced users
+
 ## 1.1.6
 
 ### Patch Changes
