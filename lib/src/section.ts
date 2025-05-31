@@ -294,3 +294,5 @@ export const toSection = async (
 
   return { ...sectionProps, children: processBlockNodeChildren(node, {}) };
 };
+
+export { docx };
