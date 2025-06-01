@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.3.0
+
+### Minor Changes
+
+- bc0e116: Add postprocess hook to the plugins
+
 ## 1.2.0
 
 ### Minor Changes
