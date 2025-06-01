@@ -9,6 +9,7 @@ import {
   IRunOptions,
   IPropertiesOptions,
   Math as DOCXMath,
+  Document,
 } from "docx";
 import * as DOCX from "docx";
 import {
@@ -167,7 +168,7 @@ export type BlockNodeChildrenProcessor = (
  */
 export interface IPlugin<T extends { type: string } = { type: "" }> {
   /**
-   * Processes block-level nodes.
+   * Processes block-level MDAST nodes and converts them to DOCX elements.
    */
   block?: (
     docx: typeof DOCX,
@@ -178,7 +179,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
   ) => (Paragraph | Table)[];
 
   /**
-   * Processes inline-level nodes.
+   * Processes inline-level MDAST nodes and converts them to DOCX runs.
    */
   inline?: (
     docx: typeof DOCX,
@@ -190,13 +191,21 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
   ) => InlineDocxNodes[];
 
   /**
-   * Allows plugins to modify document-level DOCX properties, such as styles, numbering, headers, and footers. This is useful for global formatting customizations.
+   * Modifies document-level DOCX properties, such as styles, numbering, headers, or footers.
+   * Useful for applying global formatting customizations.
    */
   root?: (props: IDocxProps) => void;
+
   /**
-   * Preprocess mdast tree before conversion
+   * Preprocesses the MDAST tree before the DOCX conversion begins.
    */
   preprocess?: (tree: Root, definitions: Definitions) => void | Promise<void>;
+
+  /**
+   * Post-processes the final DOCX document after conversion.
+   * Plugins can use this for cleanup or applying final transformations.
+   */
+  postprocess?: (doc: Document) => void | Promise<void>;
 }
 
 /**

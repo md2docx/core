@@ -38,8 +38,8 @@ export const toDocx = async (
   const footnotes: Record<number, { children: Paragraph[] }> = {};
 
   const finalDocxProps = { ...defaultDocxProps, ...docxProps };
-  // Apply global document-level modifications from default plugins
-  defaultSectionProps?.plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
+
+  const plugins = defaultSectionProps?.plugins ?? [];
 
   const processedAstInputs = await Promise.all(
     (Array.isArray(astInputs) ? astInputs : [{ ast: astInputs }]).map(async ({ ast, props }) => {
@@ -58,12 +58,14 @@ export const toDocx = async (
         }),
       );
 
-      // update docxProps by plugins
-      props?.plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
+      plugins.push(...(props?.plugins ?? []));
 
       return { ast, props: { ...defaultSectionProps, ...props }, definitions, footnoteDefinitions };
     }),
   );
+
+  // Apply global document-level modifications
+  plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
 
   // Convert MDAST trees into document sections
   const sections = await Promise.all(
@@ -78,6 +80,8 @@ export const toDocx = async (
     footnotes,
     sections,
   });
+
+  plugins?.forEach(plugin => plugin?.postprocess?.(doc));
 
   return Packer.pack(doc, outputType);
 };
