@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.3.2
+
+### Patch Changes
+
+- 56f6b67: fix: Update types for supporting HTML and advanced tables
+
 ## 1.3.1
 
 ### Patch Changes
