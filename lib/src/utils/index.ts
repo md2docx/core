@@ -163,6 +163,21 @@ export type BlockNodeChildrenProcessor = (
   paraProps: MutableParaOptions,
 ) => (Paragraph | Table)[];
 
+export interface DocxSection {
+  children: (Paragraph | Table)[];
+  headers?: {
+    readonly default?: DOCX.Header;
+    readonly first?: DOCX.Header;
+    readonly even?: DOCX.Header;
+  };
+  footers?: {
+    readonly default?: DOCX.Footer;
+    readonly first?: DOCX.Footer;
+    readonly even?: DOCX.Footer;
+  };
+  properties?: DOCX.ISectionPropertiesOptions;
+}
+
 /**
  * Interface for extending MDAST to DOCX conversion using plugins.
  */
@@ -205,7 +220,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
    * Post-processes the final DOCX document after conversion.
    * Plugins can use this for cleanup or applying final transformations.
    */
-  postprocess?: (doc: Document) => void | Promise<void>;
+  postprocess?: (sections: DocxSection[]) => void | Promise<void>;
 }
 
 /**

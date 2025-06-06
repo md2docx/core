@@ -74,14 +74,14 @@ export const toDocx = async (
     ),
   );
 
+  plugins?.forEach(plugin => plugin?.postprocess?.(sections));
+
   // Create DOCX document
   const doc = new Document({
     ...finalDocxProps,
     footnotes,
     sections,
   });
-
-  plugins?.forEach(plugin => plugin?.postprocess?.(doc));
 
   return Packer.pack(doc, outputType);
 };

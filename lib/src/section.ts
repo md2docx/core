@@ -9,6 +9,7 @@ import type {
   InlineDocxNodes,
   IPlugin,
   IDefaultMdastToDocxSectionProps,
+  DocxSection,
 } from "./utils";
 import {
   Bookmark,
@@ -142,7 +143,7 @@ export const toSection = async (
   definitions: Definitions,
   footnoteDefinitions: FootnoteDefinitions,
   props?: ISectionProps,
-) => {
+): Promise<DocxSection> => {
   const { plugins, useTitle, ...sectionProps } = {
     ...DEFAULT_SECTION_PROPS,
     ...props,
