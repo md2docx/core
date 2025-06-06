@@ -55,13 +55,6 @@ export const getDefinitions = (nodes: RootContent[]) => {
   return { definitions, footnoteDefinitions };
 };
 
-/** Type representing an extended RootContent node
- * - this type is used to avoid type errors when setting type to empty string (in case you want to avoid reprocessing that node.) in plugins
- */
-type ExtendedRootContent<T extends { type: string; data?: Data } = { type: ""; data: Data }> =
-  | RootContent
-  | T;
-
 /**
  * Extracts the textual content from a given MDAST node.
  * Recursively processes child nodes if present.
@@ -69,7 +62,7 @@ type ExtendedRootContent<T extends { type: string; data?: Data } = { type: ""; d
  * @param node - The MDAST node to extract text from.
  * @returns The combined text content of the node and its children.
  */
-export const getTextContent = (node: ExtendedRootContent): string => {
+export const getTextContent = (node: RootContent): string => {
   if ((node as Parent).children?.length)
     return (node as Parent).children.map(getTextContent).join("");
 
@@ -135,10 +128,7 @@ export const defaultDocxProps: IDocxProps = {
 export type MutableRunOptions = Mutable<Omit<IRunOptions, "children">> & { pre?: boolean };
 
 export type InlineDocxNodes = TextRun | ImageRun | InternalHyperlink | ExternalHyperlink | DOCXMath;
-export type InlineProcessor = (
-  node: ExtendedRootContent,
-  runProps: MutableRunOptions,
-) => InlineDocxNodes[];
+export type InlineProcessor = (node: RootContent, runProps: MutableRunOptions) => InlineDocxNodes[];
 
 export type InlineChildrenProcessor = (
   node: Parent,
@@ -154,7 +144,7 @@ export type MutableParaOptions = Omit<Mutable<IParagraphOptions>, "children"> & 
 };
 
 export type BlockNodeProcessor = (
-  node: ExtendedRootContent,
+  node: RootContent,
   paraProps: MutableParaOptions,
 ) => (Paragraph | Table)[];
 
@@ -181,13 +171,13 @@ export interface DocxSection {
 /**
  * Interface for extending MDAST to DOCX conversion using plugins.
  */
-export interface IPlugin<T extends { type: string } = { type: "" }> {
+export interface IPlugin {
   /**
    * Processes block-level MDAST nodes and converts them to DOCX elements.
    */
   block?: (
     docx: typeof DOCX,
-    node: ExtendedRootContent<T>,
+    node: RootContent,
     paraProps: MutableParaOptions,
     blockChildrenProcessor: BlockNodeChildrenProcessor,
     inlineChildrenProcessor: InlineChildrenProcessor,
@@ -198,7 +188,7 @@ export interface IPlugin<T extends { type: string } = { type: "" }> {
    */
   inline?: (
     docx: typeof DOCX,
-    node: ExtendedRootContent<T>,
+    node: RootContent,
     runProps: MutableRunOptions,
     definitions: Definitions,
     footnoteDefinitions: FootnoteDefinitions,
