@@ -67,7 +67,7 @@
     "test": "vitest run --coverage"
   },
   "devDependencies": {
-    "@m2d/html": "^1.0.3",
+    "@m2d/html": "^1.1.2",
     "@m2d/list": "^0.0.7",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
