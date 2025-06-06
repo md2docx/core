@@ -1,5 +1,12 @@
 # @m2d/core
 
+## 1.3.0
+
+### Minor Changes
+
+- 8d34bf3: Update types to ensure sufficient data for converting to jsx
+- 8f9703a: refactor plugin interface to update postprocess hook. Since there is very limited scope for utilizing the document object once creted, we are moving the postprocess hook to be called just before creating the document object. It gets list of sections which can be finished up just before converting to docx.
+
 ## 1.2.0
 
 ### Minor Changes
