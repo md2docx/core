@@ -1,5 +1,12 @@
 # @repo/shared
 
+## 0.0.20
+
+### Patch Changes
+
+- Updated dependencies [7bd97ca]
+  - @m2d/core@1.3.4
+
 ## 0.0.19
 
 ### Patch Changes

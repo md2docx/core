@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.3.4
+
+### Patch Changes
+
+- 7bd97ca: fix: Bring back the Extended Node support and default to EmptyNode
+
 ## 1.3.3
 
 ### Patch Changes
