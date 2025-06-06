@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.3.1
+
+### Patch Changes
+
+- 2b67af0: fix tag types in node data
+
 ## 1.3.0
 
 ### Minor Changes
