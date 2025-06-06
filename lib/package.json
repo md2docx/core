@@ -91,7 +91,7 @@
     "xxhash-wasm": "^1.1.0"
   },
   "dependencies": {
-    "@m2d/mdast": "^0.1.9"
+    "@m2d/mdast": "^0.2.0"
   },
   "peerDependencies": {
     "docx": "^9.3.0"

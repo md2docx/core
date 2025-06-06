@@ -153,8 +153,8 @@ importers:
   lib:
     dependencies:
       '@m2d/mdast':
-        specifier: ^0.1.9
-        version: 0.1.9(docx@9.5.0)
+        specifier: ^0.2.0
+        version: 0.2.0(docx@9.5.0)
     devDependencies:
       '@m2d/html':
         specifier: ^1.0.3
@@ -970,6 +970,11 @@ packages:
 
   '@m2d/mdast@0.1.9':
     resolution: {integrity: sha512-GBTGNRD+gHUIfp0z99LtYL+/p9Ua74qGDaouCBFCQxzOjZA2dYrkeu/1yUHUbAVwL0GRX+LInBW1jkhfYtB+rw==}
+    peerDependencies:
+      docx: ^9.3.0
+
+  '@m2d/mdast@0.2.0':
+    resolution: {integrity: sha512-PYBwtu9zRLzEApT/QImcEokLxOzQ4baUuaz5POQJiiVWUPcndoLHMSkXUWIvmm3HgB7ojttJpby7ldIy2eKqhQ==}
     peerDependencies:
       docx: ^9.3.0
 
@@ -4808,6 +4813,10 @@ snapshots:
       remark-math: 6.0.0
 
   '@m2d/mdast@0.1.9(docx@9.5.0)':
+    dependencies:
+      docx: 9.5.0
+
+  '@m2d/mdast@0.2.0(docx@9.5.0)':
     dependencies:
       docx: 9.5.0
 
