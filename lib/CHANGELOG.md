@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.3.3
+
+### Patch Changes
+
+- f091bdd: Simplify types.
+
 ## 1.3.2
 
 ### Patch Changes
