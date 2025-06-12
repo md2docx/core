@@ -180,9 +180,9 @@ export const generateCacheKey = async (
  *   - `cache` _(Record<string, Promise<Result>>)_ — External in-memory cache object to sync across plugins/tabs (default: internal default cache)
  *   - `cacheTarget` _(`"memory"` | `"idb"` | `"both"`)_ — Where to store the result:
  *       - `"memory"`: RAM-only; fast but temporary
- *       - `"idb"`: stores in IndexedDB only; avoids memory usage
+ *       - `"idb"`: stores in IndexedDB only; avoids memory usage; Useful for processing large data
  *       - `"both"` (default): caches in both RAM and IndexedDB
- *   - `resolveInParallel` _(boolean)_ — If true, reads from cache and computes in parallel (default: `true`);
+ *   - `parallel` _(boolean)_ — If true, reads from cache and computes in parallel (default: `true`);
  *       ignored when `cacheTarget` is `"memory"`
  *
  * @returns A memoized async function that handles caching automatically.
@@ -198,14 +198,14 @@ export const createPersistentCache = <Args extends unknown[], Result>(
     ignoreKeys?: string[];
     cache?: Record<string, Promise<Result>>;
     cacheTarget?: "idb" | "memory" | "both";
-    resolveInParallel?: boolean;
+    parallel?: boolean;
   },
 ): ((...args: Args) => Promise<Result>) => {
   const {
     ignoreKeys = [],
     cache = defaultCache as Record<string, Promise<Result>>,
     cacheTarget = "both",
-    resolveInParallel = true,
+    parallel = true,
   } = config ?? {};
 
   return async (...args: Args): Promise<Result> => {
@@ -214,7 +214,7 @@ export const createPersistentCache = <Args extends unknown[], Result>(
     if (cacheTarget === "memory") return (cache[cacheKey] ??= generator(...args));
 
     const resultPromise = (async () => {
-      const result = resolveInParallel
+      const result = parallel
         ? await Promise.any([
             readFromCache<Result>(cacheKey).then(result => result ?? Promise.reject()),
             generator(...args),
