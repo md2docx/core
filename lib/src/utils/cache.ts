@@ -21,7 +21,7 @@ const CACHE_STORE_NAME = "m2d";
 const LAST_ACCESSED_FIELD = "last-accessed";
 
 /** In-memory cache to deduplicate ongoing parallel requests */
-const runtimeCache: Record<string, Promise<unknown>> = {};
+const defaultCache: Record<string, Promise<unknown>> = {};
 
 /* v8 ignore start - IndexedDB is not available in test environments */
 /**
@@ -172,12 +172,13 @@ export const createPersistentCache = <Args extends unknown[], Result>(
   generator: (...args: Args) => Promise<Result>,
   namespace: string,
   ignoreKeys: string[] = [],
+  cache: Record<string, Promise<unknown>> = defaultCache,
   useIdb = true,
 ): ((...args: Args) => Promise<Result>) => {
   return async (...args: Args): Promise<Result> => {
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
-    runtimeCache[cacheKey] ??= (async () => {
+    cache[cacheKey] ??= (async () => {
       const promises = [generator(...args)];
       if (useIdb)
         promises.push(
@@ -203,7 +204,7 @@ export const createPersistentCache = <Args extends unknown[], Result>(
       return result;
     })();
 
-    return runtimeCache[cacheKey] as Promise<Result>;
+    return cache[cacheKey] as Promise<Result>;
   };
 };
 
