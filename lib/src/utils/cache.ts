@@ -160,6 +160,55 @@ export const generateCacheKey = async (
 };
 
 /**
+ * Configuration options for the persistent caching utility.
+ *
+ * @template TResult - Result type returned by the generator function.
+ */
+interface BaseCacheConfig<TResult> {
+  /**
+   * Keys to exclude when generating a stable cache key from input arguments.
+   */
+  ignoreKeys?: string[];
+
+  /**
+   * In-memory cache object, useful for cache sharing across plugins/tabs.
+   */
+  cache?: Record<string, Promise<TResult>>;
+}
+
+interface MemoryOnlyCacheConfig<TResult> extends BaseCacheConfig<TResult> {
+  /**
+   * Store only in RAM (fast, temporary). No IndexedDB fallback.
+   */
+  cacheMode: "memory";
+
+  /**
+   * No parallel computation needed since memory cache is synchronous.
+   */
+  parallel?: never;
+}
+
+interface IdbOrBothCacheConfig<TResult> extends BaseCacheConfig<TResult> {
+  /**
+   * Store in IndexedDB, or both memory and IndexedDB.
+   */
+  cacheMode: "idb" | "both";
+
+  /**
+   * If true, read from cache and compute in parallel.
+   * Defaults to true.
+   */
+  parallel?: boolean;
+}
+
+/**
+ * Type-safe configuration for createPersistentCache utility.
+ */
+export type CacheConfigType<TResult> =
+  | MemoryOnlyCacheConfig<TResult>
+  | IdbOrBothCacheConfig<TResult>;
+
+/**
  * Creates a cached version of an async function with memory and/or persistent caching capabilities.
  *
  * ## Features:
@@ -191,35 +240,30 @@ export const generateCacheKey = async (
  * const fetchWithCache = createPersistentCache(fetchJson, "remote-data");
  * await fetchWithCache("https://example.com/api/data");
  */
-export const createPersistentCache = <Args extends unknown[], Result>(
-  generator: (...args: Args) => Promise<Result>,
+export const createPersistentCache = <TArgs extends unknown[], TResult>(
+  generator: (...args: TArgs) => Promise<TResult>,
   namespace: string,
-  config?: {
-    ignoreKeys?: string[];
-    cache?: Record<string, Promise<Result>>;
-    cacheTarget?: "idb" | "memory" | "both";
-    parallel?: boolean;
-  },
-): ((...args: Args) => Promise<Result>) => {
+  config?: CacheConfigType<TResult>,
+): ((...args: TArgs) => Promise<TResult>) => {
   const {
     ignoreKeys = [],
-    cache = defaultCache as Record<string, Promise<Result>>,
-    cacheTarget = "both",
+    cache = defaultCache as Record<string, Promise<TResult>>,
+    cacheMode = "both",
     parallel = true,
   } = config ?? {};
 
-  return async (...args: Args): Promise<Result> => {
+  return async (...args: TArgs): Promise<TResult> => {
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
-    if (cacheTarget === "memory") return (cache[cacheKey] ??= generator(...args));
+    if (cacheMode === "memory") return (cache[cacheKey] ??= generator(...args));
 
     const resultPromise = (async () => {
       const result = parallel
         ? await Promise.any([
-            readFromCache<Result>(cacheKey).then(result => result ?? Promise.reject()),
+            readFromCache<TResult>(cacheKey).then(result => result ?? Promise.reject()),
             generator(...args),
           ])
-        : ((await readFromCache<Result>(cacheKey)) ?? (await generator(...args)));
+        : ((await readFromCache<TResult>(cacheKey)) ?? (await generator(...args)));
 
       const resultsToCache = { id: cacheKey, namespace } as {
         id: string;
@@ -234,7 +278,7 @@ export const createPersistentCache = <Args extends unknown[], Result>(
       return result;
     })();
 
-    if (cacheTarget === "both") cache[cacheKey] = resultPromise;
+    if (cacheMode === "both") cache[cacheKey] = resultPromise;
 
     return resultPromise;
   };
