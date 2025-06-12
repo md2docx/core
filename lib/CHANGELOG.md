@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.4.1
+
+### Patch Changes
+
+- 502fd3e: Better type safety and minor rename cacheTarget to cacheMode
+
 ## 1.4.0
 
 ### Minor Changes
