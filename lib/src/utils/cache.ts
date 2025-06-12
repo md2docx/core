@@ -49,7 +49,7 @@ const openCacheDatabase = (): Promise<IDBDatabase> =>
  * @param key - Unique cache key
  * @returns The cached value, or `undefined` if not found
  */
-const readFromCache = <T>(key: string): Promise<T | undefined> =>
+export const readFromCache = <T>(key: string): Promise<T | undefined> =>
   openCacheDatabase()
     .then(db => {
       return new Promise<T | undefined>((resolve, reject) => {
@@ -77,7 +77,9 @@ const readFromCache = <T>(key: string): Promise<T | undefined> =>
  *
  * @param value - Object to store; must include `id` and `namespace`
  */
-const writeToCache = <T extends { namespace: string; id: string }>(value: T): Promise<void> =>
+export const writeToCache = <T extends { namespace: string; id: string }>(
+  value: T,
+): Promise<void> =>
   openCacheDatabase()
     .then(db => {
       const tx = db.transaction(CACHE_STORE_NAME, "readwrite");
@@ -118,7 +120,7 @@ const getSerializableKeys = (object: Record<string, unknown>, ignoreKeys: string
  * @param ignoreKeys - Keys to exclude from object serialization
  * @returns A stable, stringified representation
  */
-const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
+export const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
   if (Array.isArray(obj)) {
     return obj
       .map(item => stableSerialize(item, ignoreKeys))
@@ -158,38 +160,67 @@ export const generateCacheKey = async (
 };
 
 /**
- * Creates a wrapper around a generator function that adds in-memory and persistent caching.
+ * Creates a cached version of an async function with memory and/or persistent caching capabilities.
  *
- * - Prevents redundant computation by caching results in IndexedDB and memory
- * - Automatically tracks access time for future cleanup
+ * ## Features:
+ * - Prevents redundant computations across sessions or concurrent calls
+ * - Shares results between tabs or plugins (Pass external cache object to share in-memory cache across plugins)
+ * - Supports in-memory, IndexedDB, or both as cache targets
+ * - Optional parallel execution of cache read and function compute
+ * - Useful for data generation, API fetches, or any expensive computation
+ * *
+ * ## Parameters
+ * @template Args - Argument types of the generator function
+ * @template Result - Return type of the generator function
  *
- * @param generator - Function to cache
- * @param namespace - A string to tag the data for cleanup/filtering purposes
- * @param ignoreKeys - Optional list of keys to ignore during serialization
- * @returns A wrapped version of the generator with caching behavior
+ * @param generator - The async function to cache (e.g., a fetcher or processor)
+ * @param namespace - A tag used to group related cached entries for cleanup or metrics
+ * @param config - Optional configuration:
+ *   - `ignoreKeys` _(string[])_ — Keys to exclude from cache key generation (default: `[]`)
+ *   - `cache` _(Record<string, Promise<Result>>)_ — External in-memory cache object to sync across plugins/tabs (default: internal default cache)
+ *   - `cacheTarget` _(`"memory"` | `"idb"` | `"both"`)_ — Where to store the result:
+ *       - `"memory"`: RAM-only; fast but temporary
+ *       - `"idb"`: stores in IndexedDB only; avoids memory usage
+ *       - `"both"` (default): caches in both RAM and IndexedDB
+ *   - `resolveInParallel` _(boolean)_ — If true, reads from cache and computes in parallel (default: `true`);
+ *       ignored when `cacheTarget` is `"memory"`
+ *
+ * @returns A memoized async function that handles caching automatically.
+ *
+ * @example
+ * const fetchWithCache = createPersistentCache(fetchJson, "remote-data");
+ * await fetchWithCache("https://example.com/api/data");
  */
 export const createPersistentCache = <Args extends unknown[], Result>(
   generator: (...args: Args) => Promise<Result>,
   namespace: string,
-  ignoreKeys: string[] = [],
-  cache: Record<string, Promise<unknown>> = defaultCache,
-  useIdb = true,
+  config?: {
+    ignoreKeys?: string[];
+    cache?: Record<string, Promise<Result>>;
+    cacheTarget?: "idb" | "memory" | "both";
+    resolveInParallel?: boolean;
+  },
 ): ((...args: Args) => Promise<Result>) => {
+  const {
+    ignoreKeys = [],
+    cache = defaultCache as Record<string, Promise<Result>>,
+    cacheTarget = "both",
+    resolveInParallel = true,
+  } = config ?? {};
+
   return async (...args: Args): Promise<Result> => {
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
-    cache[cacheKey] ??= (async () => {
-      const promises = [generator(...args)];
-      if (useIdb)
-        promises.push(
-          (async () => {
-            const cachedResult = await readFromCache<Result>(cacheKey);
-            if (cachedResult) return cachedResult;
-            else throw new Error("No cached result found");
-          })(),
-        );
+    if (cacheTarget === "memory") return (cache[cacheKey] ??= generator(...args));
 
-      const result = (await Promise.any(promises)) as Record<string, string> | undefined;
+    const resultPromise = (async () => {
+      const result = resolveInParallel
+        ? await Promise.any([
+            readFromCache<Result>(cacheKey).then(result => result ?? Promise.reject()),
+            generator(...args),
+          ])
+        : ((await readFromCache<Result>(cacheKey)) ?? (await generator(...args)));
+
       const resultsToCache = { id: cacheKey, namespace } as {
         id: string;
         namespace: string;
@@ -197,14 +228,15 @@ export const createPersistentCache = <Args extends unknown[], Result>(
       };
       if (result)
         getSerializableKeys(result).forEach(key => {
-          resultsToCache[key] = result[key];
+          resultsToCache[key] = (result as Record<string, unknown>)[key];
         });
-      else resultsToCache.namespace = "keep";
       writeToCache(resultsToCache);
       return result;
     })();
 
-    return cache[cacheKey] as Promise<Result>;
+    if (cacheTarget === "both") cache[cacheKey] = resultPromise;
+
+    return resultPromise;
   };
 };
 
