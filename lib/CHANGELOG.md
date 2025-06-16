@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.4.2
+
+### Patch Changes
+
+- 45be2da: Expand data type to handle more of HTML Input element data.
+
 ## 1.4.1
 
 ### Patch Changes
