@@ -73,7 +73,7 @@
     "@repo/typescript-config": "workspace:*",
     "@testing-library/react": "^16.3.0",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^24.0.1",
+    "@types/node": "^24.0.3",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
@@ -91,7 +91,7 @@
     "xxhash-wasm": "^1.1.0"
   },
   "dependencies": {
-    "@m2d/mdast": "^0.2.3"
+    "@m2d/mdast": "^0.2.4"
   },
   "peerDependencies": {
     "docx": "^9.3.0"
