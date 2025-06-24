@@ -222,6 +222,32 @@ export interface IPlugin<T extends Node = EmptyNode> {
 }
 
 /**
- * @mayank/docx is a fork of the `docx` library with minor modifications,
- * primarily adding exports for additional types missing from the original `docx` library.
+ * Deeply merges user options over default options.
+ * Later values override earlier ones. Arrays are not merged.
+ *
+ * @param options - User-provided overrides.
+ * @param defaultOptions - Default values.
+ * @returns A deeply merged object.
  */
+export function mergeOptions<T>(options?: Partial<T>, defaultOptions?: Partial<T>): T {
+  const result: any = { ...defaultOptions, ...options };
+
+  if (options) {
+    for (const [key, value] of Object.entries(options)) {
+      const defaultVal = (defaultOptions as any)?.[key];
+
+      if (
+        value &&
+        typeof value === "object" &&
+        !Array.isArray(value) &&
+        defaultVal &&
+        typeof defaultVal === "object" &&
+        !Array.isArray(defaultVal)
+      ) {
+        result[key] = mergeOptions(value, defaultVal);
+      }
+    }
+  }
+
+  return result as T;
+}

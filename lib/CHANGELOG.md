@@ -1,5 +1,12 @@
 # @m2d/core
 
+## 1.4.3
+
+### Patch Changes
+
+- 26199b2: Attempt to keep entire code block on same page.
+- 4fbac23: feat/utils: add mergeOptions function for deep merging user and default options
+
 ## 1.4.2
 
 ### Patch Changes
