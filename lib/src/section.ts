@@ -36,7 +36,9 @@ const createInlineProcessor = (
   definitions: Definitions,
   footnoteDefinitions: FootnoteDefinitions,
   plugins: IPlugin[],
+  trimInnerSpaces: boolean,
 ) => {
+  const normalizeText = (text: string) => (trimInnerSpaces ? text.replace(/ +/g, " ") : text);
   /** inline node children processor */
   const processInlineNodeChildren: InlineChildrenProcessor = (node, runProps = {}) =>
     (
@@ -66,8 +68,15 @@ const createInlineProcessor = (
               ...(newRunProps.pre
                 ? node.value
                     .split("\n")
-                    .map(text => new TextRun({ text, ...newRunProps, break: 1 }))
-                : [new TextRun({ text: node.value, ...newRunProps })]),
+                    .map(
+                      text => new TextRun({ text: normalizeText(text), ...newRunProps, break: 1 }),
+                    )
+                : [
+                    new TextRun({
+                      text: normalizeText(node.value),
+                      ...newRunProps,
+                    }),
+                  ]),
             ];
           case "checkbox":
             // skipcq: JS-0066
@@ -78,7 +87,7 @@ const createInlineProcessor = (
             return [
               ...docxNodes,
               new TextRun({
-                text: node.value,
+                text: normalizeText(node.value),
                 ...newRunProps,
                 style: "code",
                 font: { name: "Consolas" },
@@ -144,7 +153,7 @@ export const toSection = async (
   footnoteDefinitions: FootnoteDefinitions,
   props?: ISectionProps,
 ): Promise<DocxSection> => {
-  const { plugins, useTitle, ...sectionProps } = {
+  const { plugins, useTitle, trimInnerSpaces, ...sectionProps } = {
     ...DEFAULT_SECTION_PROPS,
     ...props,
   } as IDefaultMdastToDocxSectionProps;
@@ -155,6 +164,7 @@ export const toSection = async (
     definitions,
     footnoteDefinitions,
     plugins,
+    trimInnerSpaces,
   );
 
   /** process block node children */

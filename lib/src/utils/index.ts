@@ -88,6 +88,11 @@ export interface IDefaultMdastToDocxSectionProps extends Omit<DOCX.ISectionOptio
    * List of plugins to extend conversion functionality.
    */
   plugins: Array<IPlugin>;
+
+  /**
+   * Should trim multiple white spaces in text nodes? 'a    b' will become 'a b'
+   */
+  trimInnerSpaces: boolean;
 }
 
 /**
@@ -100,6 +105,7 @@ export type ISectionProps = Optional<IDefaultMdastToDocxSectionProps>;
 export const DEFAULT_SECTION_PROPS: IDefaultMdastToDocxSectionProps = {
   useTitle: true,
   plugins: [],
+  trimInnerSpaces: true,
 };
 
 /**
