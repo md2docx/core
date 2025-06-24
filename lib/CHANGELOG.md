@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.5.0
+
+### Minor Changes
+
+- fc9452c: feat: add trimInnerSpaces option to section processing for whitespace normalization
+
 ## 1.4.3
 
 ### Patch Changes

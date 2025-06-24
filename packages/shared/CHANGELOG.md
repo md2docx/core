@@ -1,5 +1,12 @@
 # @repo/shared
 
+## 0.0.25
+
+### Patch Changes
+
+- Updated dependencies [fc9452c]
+  - @m2d/core@1.5.0
+
 ## 0.0.24
 
 ### Patch Changes
