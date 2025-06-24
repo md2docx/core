@@ -234,17 +234,17 @@ export function mergeOptions<T>(options?: Partial<T>, defaultOptions?: Partial<T
 
   if (options) {
     for (const [key, value] of Object.entries(options)) {
-      const base = (defaultOptions as any)?.[key];
+      const defaultVal = (defaultOptions as any)?.[key];
 
       if (
         value &&
         typeof value === "object" &&
         !Array.isArray(value) &&
-        base &&
-        typeof base === "object" &&
-        !Array.isArray(base)
+        defaultVal &&
+        typeof defaultVal === "object" &&
+        !Array.isArray(defaultVal)
       ) {
-        result[key] = mergeOptions(value, base);
+        result[key] = mergeOptions(value, defaultVal);
       }
     }
   }
