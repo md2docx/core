@@ -32,7 +32,6 @@ describe("toDocx", () => {
     const docxBlob = await toDocx(
       mdast,
       { title: "Custom Title" },
-      // @ts-expect-error WIP
       { plugins: [htmlPlugin(), listPlugin()] },
     );
 
