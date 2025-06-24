@@ -237,6 +237,7 @@ export const toSection = async (
                 ...newParaProps,
                 alignment: "left",
                 style: "blockCode",
+                keepLines: true,
                 children: node.value.split("\n").map(
                   (line, i) =>
                     // @ts-expect-error -- ok to pass extra data
