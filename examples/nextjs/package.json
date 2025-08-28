@@ -14,18 +14,12 @@
   "dependencies": {
     "@m2d/core": "workspace:*",
     "@repo/shared": "workspace:*",
-    "mdast2docx": "1.4.1",
     "next": "^15.5.2",
     "nextjs-darkmode-lite": "^1.0.10",
     "nextjs-themes": "^4.0.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react18-loaders": "^1.1.7",
-    "remark-frontmatter": "^5.0.0",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0",
-    "remark-parse": "^11.0.0",
-    "unified": "^11.0.5",
+    "react18-loaders": "workspace:*",
     "webgl-generative-particles": "^0.0.1"
   },
   "devDependencies": {
