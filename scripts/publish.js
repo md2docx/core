@@ -50,7 +50,7 @@ if (isPatch) {
     /** Create new release branch for every Major or Minor release */
     execSync(`git checkout -b ${releaseBranch} && git push origin ${releaseBranch}`);
   } catch (err) {
-    console.error("Error updating sec-md or creating release branch", err);
+    console.error("Error pushing to release branch: ", err);
   }
 }
 
@@ -63,10 +63,16 @@ execSync(`cd lib && pnpm build && npm publish ${provenance} --access public`, { 
 /** Create GitHub release */
 try {
   execSync(
-    `gh release create ${VERSION} --generate-notes --latest -n "$(sed '1,/^## /d;/^## /,$d' CHANGELOG.md)" --title "Release v${VERSION}"`,
+    `gh release create ${VERSION} --generate-notes --latest -n "$(sed '1,/^## /d;/^## /,$d' lib/CHANGELOG.md)" --title "Release v${VERSION}"`,
   );
 } catch {
-  execSync(`gh release create ${VERSION} --generate-notes --latest --title "Release v${VERSION}"`);
+  try {
+    execSync(
+      `gh release create ${VERSION} --generate-notes --latest --title "Release v${VERSION}"`,
+    );
+  } catch {
+    // ignore
+  }
 }
 
 // Publish canonical packages
