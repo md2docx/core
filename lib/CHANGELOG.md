@@ -50,7 +50,6 @@
 
   - **In-memory cache sharing**: Pass a shared cache object to coordinate between modules or tabs.
   - **Configurable cache strategies**:
-
     - `cacheTarget`: choose where data is stored — RAM, IndexedDB, or both.
     - `parallel`: race compute and read to optimize latency.
 
@@ -145,7 +144,6 @@
 - 839e2e7: feat: add persistent caching utilities with IndexedDB support
 
   Implement a centralized caching mechanism that:
-
   - Provides both in-memory and persistent IndexedDB caching
   - Includes deterministic cache key generation with xxhash
   - Supports automatic timestamp tracking for cache entries
