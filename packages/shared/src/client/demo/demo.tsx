@@ -13,7 +13,7 @@ import { removePosition } from "unist-util-remove-position";
 import demoCode from "./demo.tsx?raw";
 import { useState } from "react";
 // import { remarkDocx } from "@m2d/remark-docx";
-import { toDocx } from "mdast2docx";
+import { toDocx } from "@m2d/core";
 
 /** React live demo */
 export function Demo() {
