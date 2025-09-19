@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: required for testing */
 import { describe, it } from "vitest";
 import { mergeOptions } from "../src/utils";
 
@@ -42,7 +43,9 @@ describe.concurrent("mergeOptions", () => {
     expect(result).toEqual({ a: null, b: undefined });
   });
 
-  it("should handle both options and defaultOptions as undefined", ({ expect }) => {
+  it("should handle both options and defaultOptions as undefined", ({
+    expect,
+  }) => {
     const result = mergeOptions(undefined, undefined);
     expect(result).toEqual({});
   });

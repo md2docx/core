@@ -1,27 +1,27 @@
-import {
+import type {
+  BlockContent,
+  DefinitionContent,
+  EmptyNode,
+  Mutable,
+  Node,
+  Optional,
+  Parent,
+  Root,
+  RootContent,
+} from "@m2d/mdast";
+import type * as DOCX from "docx";
+import type {
+  Math as DOCXMath,
   ExternalHyperlink,
   ImageRun,
   InternalHyperlink,
   IParagraphOptions,
-  TextRun,
-  Table,
-  Paragraph,
-  IRunOptions,
   IPropertiesOptions,
-  Math as DOCXMath,
+  IRunOptions,
+  Paragraph,
+  Table,
+  TextRun,
 } from "docx";
-import * as DOCX from "docx";
-import {
-  BlockContent,
-  DefinitionContent,
-  Parent,
-  Root,
-  RootContent,
-  Mutable,
-  Optional,
-  Node,
-  EmptyNode,
-} from "@m2d/mdast";
 
 export { convertInchesToTwip, convertMillimetersToTwip } from "docx";
 
@@ -43,11 +43,13 @@ export type FootnoteDefinitions = Record<
 export const getDefinitions = (nodes: RootContent[]) => {
   const definitions: Definitions = {};
   const footnoteDefinitions: FootnoteDefinitions = {};
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     if (node.type === "definition") {
       definitions[node.identifier.toUpperCase()] = node.url;
     } else if (node.type === "footnoteDefinition") {
-      footnoteDefinitions[node.identifier.toUpperCase()] = { children: node.children };
+      footnoteDefinitions[node.identifier.toUpperCase()] = {
+        children: node.children,
+      };
     } else if ((node as Parent).children?.length) {
       Object.assign(definitions, getDefinitions((node as Parent).children));
     }
@@ -77,7 +79,8 @@ export const getTextContent = (node: ExtendedRootContent): string => {
 /**
  * Default configuration for converting MDAST to DOCX, including title handling and plugin extensions.
  */
-export interface IDefaultMdastToDocxSectionProps extends Omit<DOCX.ISectionOptions, "children"> {
+export interface IDefaultMdastToDocxSectionProps
+  extends Omit<DOCX.ISectionOptions, "children"> {
   /**
    * If true, H1 corresponds to the title, H2 to Heading1, etc.
    * @default true
@@ -111,7 +114,10 @@ export const DEFAULT_SECTION_PROPS: IDefaultMdastToDocxSectionProps = {
 /**
  * Defines document properties, excluding sections and footnotes (which are managed internally).
  */
-export type IDocxProps = Omit<Mutable<IPropertiesOptions>, "sections" | "footnotes">;
+export type IDocxProps = Omit<
+  Mutable<IPropertiesOptions>,
+  "sections" | "footnotes"
+>;
 
 export const defaultDocxProps: IDocxProps = {
   styles: {
@@ -136,9 +142,16 @@ export const defaultDocxProps: IDocxProps = {
 /**
  * Mutable version of IRunOptions where all properties are writable.
  */
-export type MutableRunOptions = Mutable<Omit<IRunOptions, "children">> & { pre?: boolean };
+export type MutableRunOptions = Mutable<Omit<IRunOptions, "children">> & {
+  pre?: boolean;
+};
 
-export type InlineDocxNodes = TextRun | ImageRun | InternalHyperlink | ExternalHyperlink | DOCXMath;
+export type InlineDocxNodes =
+  | TextRun
+  | ImageRun
+  | InternalHyperlink
+  | ExternalHyperlink
+  | DOCXMath;
 export type InlineProcessor = (
   node: ExtendedRootContent,
   runProps: MutableRunOptions,
@@ -152,7 +165,10 @@ export type InlineChildrenProcessor = (
 /**
  * Mutable version of IParagraphOptions where all properties are writable.
  */
-export type MutableParaOptions = Omit<Mutable<IParagraphOptions>, "children"> & {
+export type MutableParaOptions = Omit<
+  Mutable<IParagraphOptions>,
+  "children"
+> & {
   checked?: boolean | null;
   pre?: boolean;
 };
@@ -235,12 +251,16 @@ export interface IPlugin<T extends Node = EmptyNode> {
  * @param defaultOptions - Default values.
  * @returns A deeply merged object.
  */
-export function mergeOptions<T>(options?: Partial<T>, defaultOptions?: Partial<T>): T {
+export function mergeOptions<T>(
+  options?: Partial<T>,
+  defaultOptions?: Partial<T>,
+): T {
+  // biome-ignore lint/suspicious/noExplicitAny: required for dynamically adding/removing keys from object
   const result: any = { ...defaultOptions, ...options };
 
   if (options) {
     for (const [key, value] of Object.entries(options)) {
-      const defaultVal = (defaultOptions as any)?.[key];
+      const defaultVal = (defaultOptions as Record<string, unknown>)?.[key];
 
       if (
         value &&

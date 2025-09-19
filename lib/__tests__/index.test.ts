@@ -1,11 +1,12 @@
-import { describe, it, expect } from "vitest";
-import { toDocx } from "../src"; // Adjust path based on your setup
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import fs from "fs";
+/** biome-ignore-all lint/suspicious/noExplicitAny: required for testing */
+import fs from "node:fs";
 import { htmlPlugin } from "@m2d/html";
 import { listPlugin } from "@m2d/list";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import { unified } from "unified";
+import { describe, expect, it } from "vitest";
+import { toDocx } from "../src"; // Adjust path based on your setup
 
 const markdown = fs.readFileSync("../sample.md", "utf-8");
 
@@ -13,7 +14,11 @@ describe("toDocx", () => {
   it("should convert a basic Markdown string to a DOCX Blob", async () => {
     const mdast = unified().use(remarkParse).parse(markdown);
 
-    const docxBlob = await toDocx(mdast, { title: "Test Document" }, { useTitle: false });
+    const docxBlob = await toDocx(
+      mdast,
+      { title: "Test Document" },
+      { useTitle: false },
+    );
 
     expect(docxBlob).toBeInstanceOf(Blob);
   });
@@ -42,7 +47,11 @@ describe("toDocx", () => {
     const md1 = unified().use(remarkParse).parse("# First Section");
     const md2 = unified().use(remarkParse).parse("## Second Section");
 
-    const docxBlob = await toDocx([{ ast: md1 }, { ast: md2 }], { title: "Multi-section Doc" }, {});
+    const docxBlob = await toDocx(
+      [{ ast: md1 }, { ast: md2 }],
+      { title: "Multi-section Doc" },
+      {},
+    );
 
     expect(docxBlob).toBeInstanceOf(Blob);
   });
@@ -55,6 +64,17 @@ describe("toDocx", () => {
     } catch (error) {
       expect(error).toBeDefined();
     }
+  });
+
+  it("should show warning for unknown node", async ({ expect }) => {
+    const docxBlob = await toDocx(
+      // @ts-expect-error -- testing unknown type
+      { type: "root", children: [{ type: "unknown" }] },
+      { title: "Test Document" },
+      { plugins: [{ inline: () => [], block: () => [] }] },
+    );
+
+    expect(docxBlob).toBeInstanceOf(Blob);
   });
 
   it("should handle footnotes", async ({ expect }) => {

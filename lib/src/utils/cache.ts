@@ -51,7 +51,7 @@ const openCacheDatabase = (): Promise<IDBDatabase> =>
  */
 export const readFromCache = <T>(key: string): Promise<T | undefined> =>
   openCacheDatabase()
-    .then(db => {
+    .then((db) => {
       return new Promise<T | undefined>((resolve, reject) => {
         const tx = db.transaction(CACHE_STORE_NAME, "readonly");
         const store = tx.objectStore(CACHE_STORE_NAME);
@@ -67,7 +67,7 @@ export const readFromCache = <T>(key: string): Promise<T | undefined> =>
         request.onerror = () => reject(request.error);
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.warn("[cache]", err);
       return undefined;
     });
@@ -81,30 +81,33 @@ export const writeToCache = <T extends { namespace: string; id: string }>(
   value: T,
 ): Promise<void> =>
   openCacheDatabase()
-    .then(db => {
+    .then((db) => {
       const tx = db.transaction(CACHE_STORE_NAME, "readwrite");
       const store = tx.objectStore(CACHE_STORE_NAME);
       store.put({ ...value, [LAST_ACCESSED_FIELD]: Date.now() / 60000 });
 
       return new Promise<void>((resolve, reject) => {
         tx.oncomplete = () => resolve();
-        tx.onerror = err => reject(err);
+        tx.onerror = (err) => reject(err);
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.warn("[cache]", err);
     });
 /* v8 ignore end */
 
 /** get list of serializable keys in sorted order */
-const getSerializableKeys = (object: Record<string, unknown>, ignoreKeys: string[] = []) =>
-  Object.keys(object).filter(key => {
+const getSerializableKeys = (
+  object: Record<string, unknown>,
+  ignoreKeys: string[] = [],
+) =>
+  Object.keys(object).filter((key) => {
     const value = object[key];
     return (
       !ignoreKeys.includes(key) &&
       value !== undefined &&
       typeof value !== "function" &&
-      typeof (value as any)?.then !== "function"
+      typeof (value as PromiseLike<unknown>)?.then !== "function"
     );
   });
 
@@ -123,7 +126,7 @@ const getSerializableKeys = (object: Record<string, unknown>, ignoreKeys: string
 export const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
   if (Array.isArray(obj)) {
     return obj
-      .map(item => stableSerialize(item, ignoreKeys))
+      .map((item) => stableSerialize(item, ignoreKeys))
       .sort()
       .join(",");
   }
@@ -134,9 +137,9 @@ export const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
 
   const copy: Record<string, unknown> = { ...obj };
 
-  return getSerializableKeys(copy)
+  return getSerializableKeys(copy, ignoreKeys)
     .sort()
-    .map(key => `${key}:${stableSerialize(copy[key], ignoreKeys)}`)
+    .map((key) => `${key}:${stableSerialize(copy[key], ignoreKeys)}`)
     .join("|");
 };
 
@@ -155,7 +158,9 @@ export const generateCacheKey = async (
   ...args: unknown[]
 ): Promise<string> => {
   const { h64ToString } = await xxhash();
-  const serialized = args.map(arg => stableSerialize(arg, ignoreKeys)).join(",");
+  const serialized = args
+    .map((arg) => stableSerialize(arg, ignoreKeys))
+    .join(",");
   return h64ToString(serialized);
 };
 
@@ -255,15 +260,21 @@ export const createPersistentCache = <TArgs extends unknown[], TResult>(
   return async (...args: TArgs): Promise<TResult> => {
     const cacheKey = await generateCacheKey(ignoreKeys, ...args);
 
-    if (cacheMode === "memory") return (cache[cacheKey] ??= generator(...args));
+    if (cacheMode === "memory") {
+      cache[cacheKey] ??= generator(...args);
+      return cache[cacheKey];
+    }
 
     const resultPromise = (async () => {
       const result = parallel
         ? await Promise.any([
-            readFromCache<TResult>(cacheKey).then(result => result ?? Promise.reject()),
+            readFromCache<TResult>(cacheKey).then(
+              (result) => result ?? Promise.reject(),
+            ),
             generator(...args),
           ])
-        : ((await readFromCache<TResult>(cacheKey)) ?? (await generator(...args)));
+        : ((await readFromCache<TResult>(cacheKey)) ??
+          (await generator(...args)));
 
       const resultsToCache = { id: cacheKey, namespace } as {
         id: string;
@@ -271,7 +282,7 @@ export const createPersistentCache = <TArgs extends unknown[], TResult>(
         [key: string]: unknown;
       };
       if (result)
-        getSerializableKeys(result).forEach(key => {
+        getSerializableKeys(result).forEach((key) => {
           resultsToCache[key] = (result as Record<string, unknown>)[key];
         });
       writeToCache(resultsToCache);
@@ -297,7 +308,10 @@ export const createPersistentCache = <TArgs extends unknown[], TResult>(
  * @param maxAgeMinutes - Age threshold in minutes; entries older than this will be removed
  * @param namespace - Namespace tag to limit cleanup scope
  */
-export const simpleCleanup = async (maxAgeMinutes: number, namespace: string): Promise<void> => {
+export const simpleCleanup = async (
+  maxAgeMinutes: number,
+  namespace: string,
+): Promise<void> => {
   try {
     const db = await openCacheDatabase();
     const tx = db.transaction(CACHE_STORE_NAME, "readwrite");
