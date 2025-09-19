@@ -137,7 +137,7 @@ export const stableSerialize = (obj: unknown, ignoreKeys: string[]): string => {
 
   const copy: Record<string, unknown> = { ...obj };
 
-  return getSerializableKeys(copy)
+  return getSerializableKeys(copy, ignoreKeys)
     .sort()
     .map((key) => `${key}:${stableSerialize(copy[key], ignoreKeys)}`)
     .join("|");
