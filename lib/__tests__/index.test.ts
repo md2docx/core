@@ -66,6 +66,17 @@ describe("toDocx", () => {
     }
   });
 
+  it("should show warning for unknown node", async ({ expect }) => {
+    const docxBlob = await toDocx(
+      // @ts-expect-error -- testing unknown type
+      { type: "root", children: [{ type: "unknown" }] },
+      { title: "Test Document" },
+      { plugins: [{ inline: () => [], block: () => [] }] },
+    );
+
+    expect(docxBlob).toBeInstanceOf(Blob);
+  });
+
   it("should handle footnotes", async ({ expect }) => {
     const mdast = unified().use(remarkParse).use(remarkGfm).parse(markdown);
 
