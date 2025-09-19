@@ -1,6 +1,6 @@
-import { Document, OutputType, Packer, Paragraph } from "docx";
+import type { Root as M2dRoot, RootContent } from "@m2d/mdast";
+import { Document, type OutputType, Packer, type Paragraph } from "docx";
 import type { Root } from "mdast";
-
 import { toSection } from "./section";
 import {
   DEFAULT_SECTION_PROPS,
@@ -9,7 +9,6 @@ import {
   type IDocxProps,
   type ISectionProps,
 } from "./utils";
-import { RootContent, Root as M2dRoot } from "@m2d/mdast";
 
 /**
  * Represents the input Markdown AST tree(s) for conversion.
@@ -41,30 +40,41 @@ export const toDocx = async (
   const plugins = defaultSectionProps?.plugins ?? [];
 
   const processedAstInputs = await Promise.all(
-    (Array.isArray(astInputs) ? astInputs : [{ ast: astInputs }]).map(async ({ ast, props }) => {
-      const { definitions, footnoteDefinitions } = getDefinitions(ast.children as RootContent[]);
+    (Array.isArray(astInputs) ? astInputs : [{ ast: astInputs }]).map(
+      async ({ ast, props }) => {
+        const { definitions, footnoteDefinitions } = getDefinitions(
+          ast.children as RootContent[],
+        );
 
-      // Convert footnotes into sections
-      await Promise.all(
-        Object.values(footnoteDefinitions).map(async (footnote, index) => {
-          const footnoteId = index + 1;
-          footnote.id = index + 1;
-          footnotes[footnoteId] = (await toSection(
-            { type: "root", children: footnote.children },
-            definitions,
-            {},
-          )) as { children: Paragraph[] };
-        }),
-      );
+        // Convert footnotes into sections
+        await Promise.all(
+          Object.values(footnoteDefinitions).map(async (footnote, index) => {
+            const footnoteId = index + 1;
+            footnote.id = index + 1;
+            footnotes[footnoteId] = (await toSection(
+              { type: "root", children: footnote.children },
+              definitions,
+              {},
+            )) as { children: Paragraph[] };
+          }),
+        );
 
-      plugins.push(...(props?.plugins ?? []));
+        plugins.push(...(props?.plugins ?? []));
 
-      return { ast, props: { ...defaultSectionProps, ...props }, definitions, footnoteDefinitions };
-    }),
+        return {
+          ast,
+          props: { ...defaultSectionProps, ...props },
+          definitions,
+          footnoteDefinitions,
+        };
+      },
+    ),
   );
 
   // Apply global document-level modifications
-  plugins?.forEach(plugin => plugin?.root?.(finalDocxProps));
+  plugins?.forEach((plugin) => {
+    plugin?.root?.(finalDocxProps);
+  });
 
   // Convert MDAST trees into document sections
   const sections = await Promise.all(
@@ -73,7 +83,9 @@ export const toDocx = async (
     ),
   );
 
-  plugins?.forEach(plugin => plugin?.postprocess?.(sections));
+  plugins?.forEach((plugin) => {
+    plugin?.postprocess?.(sections);
+  });
 
   // Create DOCX document
   const doc = new Document({
@@ -86,5 +98,5 @@ export const toDocx = async (
 };
 
 export type { ISectionProps, IDocxProps, IInputMDAST };
-export type { IPlugin } from "./utils";
 export type * from "@m2d/mdast";
+export type { IPlugin } from "./utils";
