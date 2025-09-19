@@ -141,7 +141,9 @@ try {
       isLatestRelease ? " --latest" : ""
     } -n "$(sed '1,/^## /d;/^## /,$d' lib/CHANGELOG.md)" --title "Release v${NEW_VERSION}"`,
   );
-} catch {}
+} catch {
+  // empty
+}
 
 // Publish canonical packages
 execSync("pnpm tsx scripts/publish-canonical.ts");

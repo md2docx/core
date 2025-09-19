@@ -48,7 +48,9 @@ if (isPatch) {
     execSync(
       `git checkout ${releaseBranch} && git merge ${BRANCH} && git push origin ${releaseBranch}`,
     );
-  } catch {}
+  } catch {
+    // ignored
+  }
 } else {
   try {
     updateSecurityMd(`${newMajor}.${newMinor}`, `${oldMajor}.${oldMinor}`);
