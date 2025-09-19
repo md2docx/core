@@ -33,7 +33,6 @@ export const toDocx = async (
   defaultSectionProps: ISectionProps = DEFAULT_SECTION_PROPS,
   outputType: OutputType = "blob",
 ) => {
-  let currentFootnoteId = 1;
   // Stores footnotes indexed by their unique ID
   const footnotes: Record<number, { children: Paragraph[] }> = {};
 
@@ -47,14 +46,14 @@ export const toDocx = async (
 
       // Convert footnotes into sections
       await Promise.all(
-        Object.values(footnoteDefinitions).map(async footnote => {
-          footnote.id = currentFootnoteId;
-          footnotes[currentFootnoteId] = (await toSection(
+        Object.values(footnoteDefinitions).map(async (footnote, index) => {
+          const footnoteId = index + 1;
+          footnote.id = index + 1;
+          footnotes[footnoteId] = (await toSection(
             { type: "root", children: footnote.children },
             definitions,
             {},
           )) as { children: Paragraph[] };
-          currentFootnoteId++;
         }),
       );
 

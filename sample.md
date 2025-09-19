@@ -213,11 +213,13 @@ Task lists are useful for tracking progress in projects.
 
 ## 7. Footnotes
 
-Referencing additional information.
+Referencing additional information.[^1]
 
-Here is a statement with a footnote.[^1]
+Here is a statement with another footnote.[^2]
 
-[^1]: This is the footnote content.
+[^1]: This is some footnote content.
+
+[^2]: This is also footnote content.
 
 ## 8. Emoji (GFM)
 
