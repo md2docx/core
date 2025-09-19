@@ -272,7 +272,11 @@ export const toSection = async (
             }
             return [...docxNodes, ...processBlockNodeChildren(node, newParaProps)];
           case "blockquote":
-            // newParaProps.indent = { left: 720, hanging: 360 };
+            newParaProps.indent = { left: 720, hanging: 360 };
+            newParaProps.border = {
+              ...newParaProps.border,
+              left: { style: BorderStyle.INSET, size: 20, space: 14, color: "aaaaaa" },
+            };
             return [...docxNodes, ...processBlockNodeChildren(node, newParaProps)];
           case "listItem":
             newParaProps.checked = node.checked;

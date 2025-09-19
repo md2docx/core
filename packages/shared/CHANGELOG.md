@@ -1,5 +1,13 @@
 # @repo/shared
 
+## 0.0.26
+
+### Patch Changes
+
+- Updated dependencies [c250ec4]
+- Updated dependencies [ab89cfb]
+  - @m2d/core@1.6.0
+
 ## 0.0.25
 
 ### Patch Changes
