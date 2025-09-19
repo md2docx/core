@@ -38,15 +38,17 @@ export function Demo() {
   const downloadDocx = () => {
     setLoading(true);
 
-    toDocx(mdast).then((blob) => {
-      const url = URL.createObjectURL(blob as Blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "my-document.docx";
-      link.click();
-      URL.revokeObjectURL(url);
-      setLoading(false);
-    });
+    toDocx(mdast, {}, { footnoteProps: { italics: true, size: 20 } }).then(
+      (blob) => {
+        const url = URL.createObjectURL(blob as Blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "my-document.docx";
+        link.click();
+        URL.revokeObjectURL(url);
+        setLoading(false);
+      },
+    );
   };
 
   // console.log(docxProcessor.processSync(md));

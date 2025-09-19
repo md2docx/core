@@ -102,8 +102,10 @@ export interface IDefaultMdastToDocxSectionProps
  * Defines properties for a document section, omitting the "children" property from ISectionOptions.
  * Also defining properties for MDAST to DOCX conversion
  */
-
-export type ISectionProps = Optional<IDefaultMdastToDocxSectionProps>;
+export type ISectionProps = Optional<IDefaultMdastToDocxSectionProps> & {
+  /** Configures paragraph and run styling options specifically for footnote content rendering */
+  footnoteProps?: MutableParaOptions & MutableRunOptions;
+};
 
 export const DEFAULT_SECTION_PROPS: IDefaultMdastToDocxSectionProps = {
   useTitle: true,

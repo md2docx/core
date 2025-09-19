@@ -350,7 +350,10 @@ export const toSection = async (
       }
     });
 
-  return { ...sectionProps, children: processBlockNodeChildren(node, {}) };
+  return {
+    ...sectionProps,
+    children: processBlockNodeChildren(node, props?.footnoteProps || {}),
+  };
 };
 
 export { docx };

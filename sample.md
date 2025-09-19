@@ -217,9 +217,14 @@ Referencing additional information.[^1]
 
 Here is a statement with another footnote.[^2]
 
-[^1]: This is some footnote content.
+Footnote with link is here.[^3]
 
+Footnote with image is here.[^4]
+
+[^1]: This is some footnote content.
 [^2]: This is also footnote content.
+[^3]: This is a **footnote** with [link](some-link.com)
+[^4]: This is a footnote with <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQYV2NkgIL//xmCgcxMIHaGCu0F0tMZGRnWgviMIAKoqANIlcM0odGtQMU1jEBFPkCJzTgUwYS9QAoPAHn2BBQeBCn8AFTET0DhR5IUEm21J9DabQQ9Q3TwEBvgACT3J/F3uWU/AAAAAElFTkSuQmCC" alt="Sample Image" width="150" height="150" style="border-radius: 10px;" />
 
 ## 8. Emoji (GFM)
 

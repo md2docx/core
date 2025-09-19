@@ -87,6 +87,19 @@ await toDocx(mdast, docxProps, {
 
 Returns a `Promise` resolving to a DOCX Blob, Buffer, or Base64 string.
 
+### ISectionProps
+
+The `ISectionProps` interface includes a `footnoteProps` property for customizing footnote styling:
+
+```ts
+interface ISectionProps {
+  footnoteProps?: MutableParaOptions & MutableRunOptions;
+  // ... other properties
+}
+```
+
+Use `footnoteProps` to apply custom paragraph and run styling to footnote content in your DOCX output.
+
 ## 🤖 Generative AI Use-case
 
 AI tools often generate Markdown — `@m2d/core` helps convert them into rich DOCX reports or presentations. This is useful in:
