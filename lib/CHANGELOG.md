@@ -1,5 +1,18 @@
 # @m2d/core
 
+## 1.6.0
+
+### Minor Changes
+
+- c250ec4: Add blockquote styling with left indent and border.
+  - Indent: left `720`, hanging `360`
+  - Border: inset left border (`size: 20`, `space: 14`, `color: aaaaaa`)
+  - Produces visually distinct blockquotes with proper formatting
+
+### Patch Changes
+
+- ab89cfb: Fixes issue parsing markdown with multiple footnotes
+
 ## 1.5.0
 
 ### Minor Changes
