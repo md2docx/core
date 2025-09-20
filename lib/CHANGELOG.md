@@ -1,5 +1,17 @@
 # @m2d/core
 
+## 1.7.0
+
+### Minor Changes
+
+- 9302c0f: Add footnoteProps to ISectionProps for custom footnote styling
+
+  Added `footnoteProps` property to `ISectionProps` interface that allows configuring paragraph and run styling options specifically for footnote content rendering. This enables fine-grained control over footnote appearance in generated DOCX documents.
+
+### Patch Changes
+
+- 5340741: Fix stableSerialize to properly pass ignoreKeys parameter to getSerializableKeys function. Possibly leading to minor performance enhancement
+
 ## 1.6.0
 
 ### Minor Changes
@@ -157,6 +169,7 @@
 - 839e2e7: feat: add persistent caching utilities with IndexedDB support
 
   Implement a centralized caching mechanism that:
+
   - Provides both in-memory and persistent IndexedDB caching
   - Includes deterministic cache key generation with xxhash
   - Supports automatic timestamp tracking for cache entries

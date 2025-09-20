@@ -46,6 +46,10 @@ export const toDocx = async (
           ast.children as RootContent[],
         );
 
+        const { footnoteProps, ...sectionProps } = {
+          ...props,
+          ...defaultSectionProps,
+        };
         // Convert footnotes into sections
         await Promise.all(
           Object.values(footnoteDefinitions).map(async (footnote, index) => {
@@ -55,15 +59,16 @@ export const toDocx = async (
               { type: "root", children: footnote.children },
               definitions,
               {},
+              { footnoteProps },
             )) as { children: Paragraph[] };
           }),
         );
 
-        plugins.push(...(props?.plugins ?? []));
+        plugins.push(...(sectionProps?.plugins ?? []));
 
         return {
           ast,
-          props: { ...defaultSectionProps, ...props },
+          props: sectionProps,
           definitions,
           footnoteDefinitions,
         };

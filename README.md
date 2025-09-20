@@ -87,6 +87,30 @@ await toDocx(mdast, docxProps, {
 
 Returns a `Promise` resolving to a DOCX Blob, Buffer, or Base64 string.
 
+### ISectionProps
+
+The `ISectionProps` interface extends DOCX section options with additional MDAST conversion properties:
+
+```ts
+interface ISectionProps {
+  // DOCX section properties (headers, footers, page settings, etc.)
+  // ... all ISectionOptions properties except 'children'
+  
+  // MDAST to DOCX conversion properties
+  useTitle?: boolean;           // H1 as title, H2 as Heading1, etc. (default: true)
+  plugins?: Array<IPlugin>;     // Plugins to extend conversion functionality
+  trimInnerSpaces?: boolean;    // Trim multiple whitespaces in text (default: true)
+  footnoteProps?: MutableParaOptions & MutableRunOptions; // Custom footnote styling
+}
+```
+
+**Key Properties:**
+- `useTitle` - Controls heading hierarchy mapping (default: `true`)
+- `plugins` - Array of plugins to extend conversion capabilities
+- `trimInnerSpaces` - Normalizes whitespace in text nodes (default: `true`)
+- `footnoteProps` - Custom paragraph and run styling for footnote content
+- Plus all standard DOCX section properties for page layout, headers, footers, etc.
+
 ## 🤖 Generative AI Use-case
 
 AI tools often generate Markdown — `@m2d/core` helps convert them into rich DOCX reports or presentations. This is useful in:
