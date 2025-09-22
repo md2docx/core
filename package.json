@@ -27,7 +27,7 @@
     "turbo": "^2.5.6",
     "turborepo-template-upgrade": "^0.7.2"
   },
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
     "node": ">=20"
   },
