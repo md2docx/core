@@ -1,5 +1,11 @@
 # @m2d/core
 
+## 1.7.1
+
+### Patch Changes
+
+- b186089: Fix potential crash when footnote definition is undefined
+
 ## 1.7.0
 
 ### Minor Changes
