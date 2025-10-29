@@ -137,7 +137,7 @@ const createInlineProcessor = (
             return [
               ...docxNodes,
               new FootnoteReferenceRun(
-                footnoteDefinitions[node.identifier].id ?? 0,
+                footnoteDefinitions[node.identifier]?.id ?? 0,
               ),
             ];
           case "fragment":
