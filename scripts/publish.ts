@@ -47,9 +47,10 @@ if (isPatch) {
   try {
     execSync(
       `git checkout ${releaseBranch} && git merge ${BRANCH} && git push origin ${releaseBranch}`,
+      { encoding: "utf8" },
     );
-  } catch {
-    // ignored
+  } catch (err) {
+    console.error("Error merging to release branch: ", err);
   }
 } else {
   try {
