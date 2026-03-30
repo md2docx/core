@@ -35,5 +35,8 @@
     "overrides": {
       "cross-spawn@<6.0.6": ">=6.0.6"
     }
+  },
+  "dependencies": {
+    "@promptshield/cli": "^1.0.0"
   }
 }

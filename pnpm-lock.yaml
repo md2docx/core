@@ -10,6 +10,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      '@promptshield/cli':
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.9
@@ -1192,6 +1196,22 @@ packages:
     resolution: {integrity: sha512-tmmZ3lQxAe/k/+rNnXQRawJ4NjxO2hqiOLTHvWchtGZULp4RyFeh6aU4XdOYBFe2KE1oShQTv4AblOs2iOrNnQ==}
     engines: {node: '>= 10.0.0'}
 
+  '@promptshield/cli@1.0.0':
+    resolution: {integrity: sha512-W3axlY8HhIK7gr6yvR2PlbYwKj47tUQSCVKFCnyXay2tBSU8AHbXXTsn7b9lIR35sT0cHqWAkNq4MNc7/+l7EA==}
+    hasBin: true
+
+  '@promptshield/core@1.0.0':
+    resolution: {integrity: sha512-4XPnj5xpb6r7Ud7ATlYI0tkcci3fHRNhFVocJ3fXtanTQzlZ2pId5ZTH5BfB8OhmDLdT9OsGlwKfEpkTJk6kgw==}
+
+  '@promptshield/ignore@2.0.0':
+    resolution: {integrity: sha512-MT7V+ghCmJM/naVjIIhEyiPrlbZ4WL2gFDwImomk4lFrFEMO+TWA7Ac8iSRF9Pgt5y/ppMt7htzjuDVmKXq1RA==}
+
+  '@promptshield/sanitizer@1.0.0':
+    resolution: {integrity: sha512-pQ6uy33l7tgt7c0dgGZFPtsWkRA1nGVqnOxg2/IpjVVhaU42WMQFI+Fyeld8bnI0vX3dLqoWdCh8ghLNZqtJcg==}
+
+  '@promptshield/workspace@1.0.2':
+    resolution: {integrity: sha512-gYS+0DBGUXud3a/P0EzxQqRMu3MhRKI5Ocj35neY2nRHhywkoocQ3l1gmiaCwrHr5NvI+aB9VT/LB0iiSIuErw==}
+
   '@rolldown/binding-android-arm64@1.0.0-rc.12':
     resolution: {integrity: sha512-pv1y2Fv0JybcykuiiD3qBOBdz6RteYojRFY1d+b95WVuzx211CRh+ytI/+9iVyWQ6koTh5dawe4S/yRfOFjgaA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2343,6 +2363,10 @@ packages:
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
+    engines: {node: '>= 4'}
+
+  ignore@7.0.5:
+    resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
   immediate@3.0.6:
@@ -4393,6 +4417,31 @@ snapshots:
       '@parcel/watcher-win32-x64': 2.5.6
     optional: true
 
+  '@promptshield/cli@1.0.0':
+    dependencies:
+      '@promptshield/core': 1.0.0
+      '@promptshield/ignore': 2.0.0
+      '@promptshield/sanitizer': 1.0.0
+      '@promptshield/workspace': 1.0.2
+
+  '@promptshield/core@1.0.0': {}
+
+  '@promptshield/ignore@2.0.0':
+    dependencies:
+      '@promptshield/core': 1.0.0
+
+  '@promptshield/sanitizer@1.0.0':
+    dependencies:
+      '@promptshield/core': 1.0.0
+
+  '@promptshield/workspace@1.0.2':
+    dependencies:
+      '@promptshield/core': 1.0.0
+      '@promptshield/ignore': 2.0.0
+      '@promptshield/sanitizer': 1.0.0
+      fast-glob: 3.3.3
+      ignore: 7.0.5
+
   '@rolldown/binding-android-arm64@1.0.0-rc.12':
     optional: true
 
@@ -5491,6 +5540,8 @@ snapshots:
       postcss: 8.5.8
 
   ignore@5.3.2: {}
+
+  ignore@7.0.5: {}
 
   immediate@3.0.6: {}
 
