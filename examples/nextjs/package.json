@@ -14,13 +14,13 @@
   "dependencies": {
     "@m2d/core": "workspace:*",
     "@repo/shared": "workspace:*",
-    "mdast2docx": "1.4.2",
-    "next": "^16.0.10",
+    "mdast2docx": "1.6.1",
+    "next": "^16.2.1",
     "nextjs-darkmode-lite": "^1.0.10",
     "nextjs-themes": "^4.0.6",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react18-loaders": "^1.1.11",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react18-loaders": "^1.1.12",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
@@ -30,9 +30,9 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^24.5.2",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
-    "typescript": "^5.9.3"
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.2"
   }
 }

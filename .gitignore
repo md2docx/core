@@ -16,3 +16,5 @@ coverage
 tsup.config.bundled*
 *.patch
 .merge-backups
+
+.promptshield
