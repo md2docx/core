@@ -22,7 +22,7 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^25.9.5",
     "husky": "^9.1.7",
-    "tsx": "^4.23.1",
+    "tsx": "^4.23.4",
     "turbo": "^2.10.8",
     "turborepo-template-upgrade": "^0.8.0"
   },
