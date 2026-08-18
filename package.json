@@ -23,7 +23,7 @@
     "@types/node": "^25.9.5",
     "husky": "^9.1.7",
     "tsx": "^4.23.12",
-    "turbo": "^2.10.10",
+    "turbo": "^2.10.11",
     "turborepo-template-upgrade": "^0.8.0"
   },
   "packageManager": "pnpm@10.33.4",
