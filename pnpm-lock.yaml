@@ -2712,8 +2712,8 @@ packages:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
-  ignore@7.0.7:
-    resolution: {integrity: sha512-dML0wP6oak21rsNYCJpJB6O1BJIEwNpGrTw0URPfAk4hm0e3pRfCtzkfB6olBcXcVlU2rouCyz7lCyRB0OMVCA==}
+  ignore@7.0.8:
+    resolution: {integrity: sha512-YYNsSlXBjMk92SKnkwvB5LOVSa6OznlFUGcsvrFgNJbJCd0M1XKeFVRc8ZByeCqz32FivYNHJVooLmdqrmvp/Q==}
     engines: {node: '>= 4'}
 
   immediate@3.0.6:
@@ -4957,7 +4957,7 @@ snapshots:
       '@promptshield/ignore': 2.0.0
       '@promptshield/sanitizer': 1.0.0
       fast-glob: 3.3.3
-      ignore: 7.0.7
+      ignore: 7.0.8
 
   '@rolldown/binding-android-arm64@1.0.0-rc.12':
     optional: true
@@ -6154,7 +6154,7 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  ignore@7.0.7: {}
+  ignore@7.0.8: {}
 
   immediate@3.0.6: {}
 
