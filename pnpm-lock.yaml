@@ -1842,8 +1842,8 @@ packages:
     cpu: [arm64]
     os: [win32]
 
-  '@turboforge/cli-kit@1.0.1':
-    resolution: {integrity: sha512-XUN0DVGiJyPTxZX0qNGMvSwRZxOZahcbh3Bd/Yv1gCDlb1ZaOez7iLNv2BmPeKbZ8Ym/raGMBfS3qyZ6tqcj3Q==}
+  '@turboforge/cli-kit@1.0.2':
+    resolution: {integrity: sha512-9XdMpu0s9fNvHtwrHU/g2a4MpqF5t6lrOKfq8uE2FO07VlhyEin2fllXdFTmN3B1wWSXWssGiLZVlsR+PWvbhA==}
     peerDependencies:
       defu: ^6.0.0
       jiti: ^2.0.0
@@ -4935,7 +4935,7 @@ snapshots:
       '@promptshield/ignore': 2.0.0
       '@promptshield/sanitizer': 1.0.0
       '@promptshield/workspace': 1.1.0
-      '@turboforge/cli-kit': 1.0.1
+      '@turboforge/cli-kit': 1.0.2
     transitivePeerDependencies:
       - defu
       - jiti
@@ -5139,7 +5139,7 @@ snapshots:
   '@turbo/windows-arm64@2.11.7':
     optional: true
 
-  '@turboforge/cli-kit@1.0.1': {}
+  '@turboforge/cli-kit@1.0.2': {}
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
